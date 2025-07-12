@@ -1,0 +1,462 @@
+object SyntAnal14: TLibSyntAnalyzer
+  Formats = <
+    item
+      DisplayName = 'Id'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Std prefix'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Std suffix'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clOlive
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Comment'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Symbol'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'String'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clTeal
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Label'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Number'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end>
+  TokenRules = <
+    item
+      DisplayName = 'parser-Comment'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = ';.*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-StartRepeat'
+      StyleName = 'Id keyword'
+      TokenType = 2
+      Expression = '(Begin\.[a-z_]+|End\.[a-z_]+|Repeat\.[a-z_]+)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-StartIf'
+      StyleName = 'Id keyword'
+      TokenType = 2
+      Expression = '(If|\.If)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-EndIf'
+      StyleName = 'Id keyword'
+      TokenType = 2
+      Expression = '(end\.If)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-Hex'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '[\da-f]+h\b | [01]+b\b | 0x\h+\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-Number'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '\d+d?\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-BeginSub'
+      StyleName = 'Label'
+      Expression = '(?i)(?<=begin\.sub\x20).*$'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-BeginFunction'
+      StyleName = 'Label'
+      Expression = '(?i)(?<=begin\.function\x20).*$'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-Asm'
+      StyleName = 'Std prefix'
+      TokenType = 2
+      Expression = '@\w+'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-Variables'
+      StyleName = 'Id'
+      TokenType = 2
+      Expression = '[a-z_%]\w*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-String'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '("|'#39').*?(\1|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'parser-Symbol'
+      StyleName = 'Symbol'
+      TokenType = 3
+      Expression = '[!=\,:\-\+\*\\/%@<>\(\)\[\]\{\}\?]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end>
+  BlockRules = <
+    item
+      DisplayName = 'StartFunc'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'Begin.Sub')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      BlockEnd = 'EndFunc'
+      NameFmt = 'Sub %s-1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      DrawStaple = True
+      CollapseFmt = '%sz0 ...'
+      TreeItemImage = 5
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'EndFunc'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'End.Sub')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'StartRepeat'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'Repeat.For'
+            'Repeat.If'
+            'Repeat.While')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      BlockEnd = 'EndRepeat'
+      DisplayInTree = False
+      HighlightPos = cpBound
+      DrawStaple = True
+      CollapseFmt = '%sz0...%ez0'
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'EndRepeat'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'End.Repeat')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'StartIf'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '.If'
+            'If')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      BlockEnd = 'EndIf'
+      DisplayInTree = False
+      HighlightPos = cpBound
+      DrawStaple = True
+      CollapseFmt = '%sz0...%ez0'
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'EndIf'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'End.If')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'StartRecord'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'Begin.Record')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      BlockEnd = 'EndRecord'
+      NameFmt = 'Record %s-3'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      DrawStaple = True
+      CollapseFmt = '%sz0 ...'
+      TreeItemImage = 4
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'EndRecord'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'End.Record')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Keywords-Prefix'
+      StyleName = 'Std prefix'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'ACCEPT'
+            'ACCEPTLINE'
+            'ARRAYS'
+            'CALL'
+            'CURSOR'
+            'DATE'
+            'DISPLAY'
+            'FILES'
+            'FUNCTION'
+            'INSERTARRAY'
+            'INSERTFILE'
+            'INSERTNUMBER'
+            'INSERTTABLE'
+            'INSERTWORD'
+            'INSERTXTABLE'
+            'INTEGERS'
+            'lcurses'
+            'lmenus'
+            'NUMBERS'
+            'RAW'
+            'RECORD'
+            'RESTORE'
+            'RUN'
+            'SAVING'
+            'TABLES'
+            'TERMINATE'
+            'TEST'
+            'USING'
+            'WAIT'
+            'WORDS'
+            'WWW'
+            'XTABLES')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Keywords-Suffix'
+      StyleName = 'Std suffix'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '%define'
+            '%include'
+            'acceptat'
+            'ADD'
+            'AND'
+            'AT'
+            'BIND'
+            'box'
+            'c_FALSE'
+            'c_TRUE'
+            'CALC'
+            'CHDIR'
+            'CLOSE'
+            'COPY'
+            'DATEFROMDAYS'
+            'DAYSFROMDATE'
+            'DELETE'
+            'DIV'
+            'ENVIRONMENT'
+            'EQ'
+            'ERROR_CODE'
+            'FGET'
+            'FIND'
+            'FPUT'
+            'GET'
+            'GETCWD'
+            'INSERT'
+            'LENGTH'
+            'LINE'
+            'LOAD'
+            'LOCK'
+            'LOWERCASE'
+            'menu'
+            'menuitems'
+            'MUL'
+            'NEXT'
+            'OPEN'
+            'OR'
+            'PAD'
+            'PROCESS'
+            'PUT'
+            'RANDOM'
+            'READ'
+            'RECORDTOSTRING'
+            'RECVMSG'
+            'REMOVE'
+            'RENAME'
+            'REPLACE'
+            'RETURN_CODE'
+            'RGET'
+            'RPUT'
+            'SEARCH'
+            'SECONDS'
+            'SENDMSG'
+            'SORT'
+            'START'
+            'STRINGTORECORD'
+            'SUB'
+            'SWAP'
+            'TIMER'
+            'TOGGLE'
+            'UNLOAD'
+            'UNLOCK'
+            'UPPERCASE'
+            'WHILE'
+            'WRITE'
+            'XOR')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Decisions/Loops'
+      StyleName = 'Id keyword'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'AND'
+            'BEGIN'
+            'ELSE'
+            'END'
+            'EXIT'
+            'IF'
+            'OR'
+            'OTHERWISE'
+            'REPEAT'
+            'WEND'
+            'WHEN')
+          TokenTypes = 4
+          IgnoreCase = True
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end>
+  CodeTemplates = <>
+  SubAnalyzers = <>
+  TokenTypeNames.Strings = (
+    'Label'
+    'Comment'
+    'Id'
+    'Symbol'
+    'String'
+    'Number'
+    'Segment')
+  Extentions = 'one'
+  LexerName = 'languageONE'
+  SkipSpaces = False
+  Notes.Strings = (
+    'Initially by: Roger Tunnicliffe'
+    'Completed by: Alexey Torgashin (CudaText)'
+    'OpCodes: https://www.languageONE.com.au')
+  LineComment = ';'
+  Charset = DEFAULT_CHARSET
+end

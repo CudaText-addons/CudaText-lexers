@@ -1,0 +1,7 @@
+[info]
+title=languageONE
+type=lexer
+subdir=-
+
+[lexer1]
+file=languageONE
