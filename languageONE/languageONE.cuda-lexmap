@@ -7,8 +7,8 @@ styles_str=String
 [map]
 Id=Id
 Id keyword=IdKeyword
-Std prefix=Id4
-Std suffix=Id3
+Cmd=Id1
+Suffix=Id3
 Comment=Comment
 Symbol=Symbol
 String=String

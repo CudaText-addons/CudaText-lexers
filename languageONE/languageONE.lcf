@@ -17,7 +17,7 @@ object SyntAnal14: TLibSyntAnalyzer
       Font.Style = [fsBold]
     end
     item
-      DisplayName = 'Std prefix'
+      DisplayName = 'Cmd'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlue
       Font.Height = -13
@@ -25,7 +25,7 @@ object SyntAnal14: TLibSyntAnalyzer
       Font.Style = []
     end
     item
-      DisplayName = 'Std suffix'
+      DisplayName = 'Suffix'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clOlive
       Font.Height = -13
@@ -74,7 +74,7 @@ object SyntAnal14: TLibSyntAnalyzer
     end>
   TokenRules = <
     item
-      DisplayName = 'parser-Comment'
+      DisplayName = 'Comment'
       StyleName = 'Comment'
       TokenType = 1
       Expression = ';.*'
@@ -82,31 +82,15 @@ object SyntAnal14: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-StartRepeat'
+      DisplayName = 'Complex keyword'
       StyleName = 'Id keyword'
       TokenType = 2
-      Expression = '(Begin\.[a-z_]+|End\.[a-z_]+|Repeat\.[a-z_]+)\b'
+      Expression = '(Begin\.[a-z_]+|End\.[a-z_]+|Repeat\.[a-z_]+|If|\.If)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-StartIf'
-      StyleName = 'Id keyword'
-      TokenType = 2
-      Expression = '(If|\.If)\b'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'parser-EndIf'
-      StyleName = 'Id keyword'
-      TokenType = 2
-      Expression = '(end\.If)\b'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'parser-Hex'
+      DisplayName = 'Number hex/bin/octal'
       StyleName = 'Number'
       TokenType = 5
       Expression = '[\da-f]+h\b | [01]+b\b | 0x\h+\b'
@@ -114,7 +98,7 @@ object SyntAnal14: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-Number'
+      DisplayName = 'Number dec'
       StyleName = 'Number'
       TokenType = 5
       Expression = '\d+d?\b'
@@ -122,29 +106,29 @@ object SyntAnal14: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-BeginSub'
+      DisplayName = 'Sub label'
       StyleName = 'Label'
       Expression = '(?i)(?<=begin\.sub\x20).*$'
       ColumnFrom = 0
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-BeginFunction'
+      DisplayName = 'Function label'
       StyleName = 'Label'
       Expression = '(?i)(?<=begin\.function\x20).*$'
       ColumnFrom = 0
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-Asm'
-      StyleName = 'Std prefix'
-      TokenType = 2
+      DisplayName = 'Asm'
+      StyleName = 'Cmd'
+      TokenType = 6
       Expression = '@\w+'
       ColumnFrom = 0
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-Variables'
+      DisplayName = 'Id'
       StyleName = 'Id'
       TokenType = 2
       Expression = '[a-z_%]\w*'
@@ -152,7 +136,7 @@ object SyntAnal14: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-String'
+      DisplayName = 'String'
       StyleName = 'String'
       TokenType = 4
       Expression = '("|'#39').*?(\1|$)'
@@ -160,7 +144,7 @@ object SyntAnal14: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'parser-Symbol'
+      DisplayName = 'Symbol'
       StyleName = 'Symbol'
       TokenType = 3
       Expression = '[!=\,:\-\+\*\\/%@<>\(\)\[\]\{\}\?]'
@@ -181,7 +165,6 @@ object SyntAnal14: TLibSyntAnalyzer
       NameFmt = 'Sub %s-1'
       RefToCondEnd = True
       HighlightPos = cpAny
-      DrawStaple = True
       CollapseFmt = '%sz0 ...'
       TreeItemImage = 5
       IgnoreAsParent = False
@@ -293,7 +276,7 @@ object SyntAnal14: TLibSyntAnalyzer
     end
     item
       DisplayName = 'Keywords-Prefix'
-      StyleName = 'Std prefix'
+      StyleName = 'Cmd'
       BlockType = btTagDetect
       ConditionList = <
         item
@@ -338,7 +321,7 @@ object SyntAnal14: TLibSyntAnalyzer
     end
     item
       DisplayName = 'Keywords-Suffix'
-      StyleName = 'Std suffix'
+      StyleName = 'Suffix'
       BlockType = btTagDetect
       ConditionList = <
         item
@@ -449,7 +432,7 @@ object SyntAnal14: TLibSyntAnalyzer
     'Symbol'
     'String'
     'Number'
-    'Segment')
+    'Asm')
   Extentions = 'one'
   LexerName = 'languageONE'
   SkipSpaces = False
