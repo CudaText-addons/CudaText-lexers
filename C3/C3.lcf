@@ -120,7 +120,7 @@ object SyntAnal4: TLibSyntAnalyzer
     item
       DisplayName = 'Bad number suffix'
       StyleName = 'Incorrect'
-      Expression = '(?<=\d)[a-z_]\w*'
+      Expression = '(?<=[\d'#39'])[a-z_]\w*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -136,7 +136,9 @@ object SyntAnal4: TLibSyntAnalyzer
       DisplayName = 'Num hex float'
       StyleName = 'Number'
       TokenType = 5
-      Expression = '0x[\h'#39']* (\.[\h'#39']*)? p[\+\-]? \h[\h'#39']* |'#13#10'0x\h[\h'#39']* \. \h[\h'#39']*'
+      Expression = 
+        '('#13#10'0x[\h_]* (\.[\h_]*)? p[\+\-]? \h[\h_]* |'#13#10'0x\h[\h_]* \. \h[\h' +
+        '_]*'#13#10') (f(8|16|32|64|128)?)?'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -144,7 +146,9 @@ object SyntAnal4: TLibSyntAnalyzer
       DisplayName = 'Num hex'
       StyleName = 'Number'
       TokenType = 5
-      Expression = '0x[\h'#39']+ [ul]* |'#13#10'0b[01'#39']+ [ul]*'
+      Expression = 
+        '(0x[\h_]+|0o[0-7_]+|0b[01_]+)'#13#10'([ui](8|16|32|64|128)|UL{0,2}|L{1' +
+        ',2})?'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -153,8 +157,8 @@ object SyntAnal4: TLibSyntAnalyzer
       StyleName = 'Number'
       TokenType = 5
       Expression = 
-        '\d[\d'#39']* (\.[\d'#39']*)? e[\+\-]? \d+ [Lf]? |'#13#10'\. [\d'#39']+ e[\+\-]? \d' +
-        '+ [Lf]? |'#13#10'\d[\d'#39']* \. (\d[\d'#39']*)? [Lf]? |'#13#10'\. \d[\d'#39']* [Lf]?'
+        '('#13#10'\d[\d_]* (\.[\d_]*)? e[\+\-]?\d+ |'#13#10'\.[\d_]+e[\+\-]?\d+ |'#13#10'\d' +
+        '[\d_]*\.(\d[\d_]*)? |'#13#10'\.\d[\d_]*'#13#10') (f(8|16|32|64|128)?)?'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -162,7 +166,7 @@ object SyntAnal4: TLibSyntAnalyzer
       DisplayName = 'Num decimal'
       StyleName = 'Number'
       TokenType = 5
-      Expression = '\d[\d'#39']* [ulf]*'
+      Expression = '\d[\d_]*'#13#10'([ui](8|16|32|64|128)|UL{0,2}|L{1,2})?'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -306,6 +310,44 @@ object SyntAnal4: TLibSyntAnalyzer
           TokenTypes = 4
         end>
       HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'id keywords compile-time'
+      StyleName = 'Id keyword'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'alignof'
+            'assignable'
+            'defined'
+            'echo'
+            'embed'
+            'endfor'
+            'endforeach'
+            'endif'
+            'endswitch'
+            'error'
+            'eval'
+            'exec'
+            'extnameof'
+            'feature'
+            'include'
+            'is_const'
+            'nameof'
+            'offsetof'
+            'qnameof'
+            'sizeof'
+            'stringify'
+            'vaarg'
+            'vaconst'
+            'vacount'
+            'vaexpr'
+            'vasplat')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
       IgnoreAsParent = False
     end
     item
@@ -547,7 +589,8 @@ object SyntAnal4: TLibSyntAnalyzer
     'fn void greet(char[] name)'
     '{'
     '    printf("Hello, %s!\n", name);'
-    '    v = 94xv;'
+    '    v = 0x20_30u64 + 2_0u128 + 2UL + 2LL '
+    '    f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx'
     '}')
   TokenTypeNames.Strings = (
     'Unknown'
