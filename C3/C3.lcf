@@ -83,7 +83,7 @@ object SyntAnal4: TLibSyntAnalyzer
       FormatType = ftBackGround
     end
     item
-      DisplayName = 'Id bad suffix'
+      DisplayName = 'Incorrect'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -13
@@ -119,8 +119,8 @@ object SyntAnal4: TLibSyntAnalyzer
     end
     item
       DisplayName = 'Bad number suffix'
-      StyleName = 'Id bad suffix'
-      Expression = '(?<=[\d'#39'])[a-z_]\w*'
+      StyleName = 'Incorrect'
+      Expression = '(?<=\d)[a-z_]\w*'
       ColumnFrom = 0
       ColumnTo = 0
     end
