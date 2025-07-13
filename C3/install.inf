@@ -1,0 +1,8 @@
+[info]
+title=C3
+type=lexer
+subdir=-
+
+[lexer1]
+file=C3
+link1=Assembly
