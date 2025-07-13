@@ -16,6 +16,5 @@ Id=Id
 Id keyword=IdKeyword
 Id special=Id3
 Id types=Id2
-Preprocessor=Comment2
 Asm BG=IncludeBG1
 Incorrect=IdBad

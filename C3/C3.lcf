@@ -65,14 +65,6 @@ object SyntAnal4: TLibSyntAnalyzer
       Font.Style = []
     end
     item
-      DisplayName = 'Preprocessor'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGreen
-      Font.Height = -13
-      Font.Name = 'Courier New'
-      Font.Style = []
-    end
-    item
       DisplayName = 'Asm BG'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
@@ -167,17 +159,6 @@ object SyntAnal4: TLibSyntAnalyzer
       StyleName = 'Number'
       TokenType = 5
       Expression = '\d[\d_]*'#13#10'([ui](8|16|32|64|128)|UL{0,2}|L{1,2})?'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'Directive'
-      Enabled = False
-      StyleName = 'Preprocessor'
-      TokenType = 6
-      Expression = 
-        '(?-i)\#\x20*(define|undef|include|if|ifdef|ifndef|else|elif|endi' +
-        'f|line|error|pragma)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -482,7 +463,7 @@ object SyntAnal4: TLibSyntAnalyzer
           TokenTypes = 4
         end>
       BlockEnd = '}'
-      NameFmt = '%s0~[(]1'
+      NameFmt = '%s-1~[(]1'
       RefToCondEnd = True
       HighlightPos = cpBound
       CancelNextRules = True
@@ -547,6 +528,32 @@ object SyntAnal4: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
+      DisplayName = 'macro'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 256
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 526
+        end
+        item
+          TagList.Strings = (
+            'macro')
+          TokenTypes = 4
+        end>
+      BlockEnd = '}'
+      NameFmt = '%s-1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      CancelNextRules = True
+      CollapseFmt = '%sz0 ...'
+      TreeItemImage = 2
+      IgnoreAsParent = False
+    end
+    item
       DisplayName = '{'
       ConditionList = <
         item
@@ -591,6 +598,25 @@ object SyntAnal4: TLibSyntAnalyzer
     '    printf("Hello, %s!\n", name);'
     '    v = 0x20_30u64 + 2_0u128 + 2UL + 2LL '
     '    f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx'
+    '}'
+    ''
+    'macro DEFINE_GET_SET(type, name)'
+    '{'
+    '    fn type get_##name(this)'
+    '    {'
+    '        return this.name;'
+    '    }'
+    ''
+    '    fn void set_##name(this, type value)'
+    '    {'
+    '        this.name = value;'
+    '    }'
+    '}'
+    ''
+    'struct MyStruct'
+    '{'
+    '    int my_field;'
+    '    DEFINE_GET_SET(int, my_field);'
     '}')
   TokenTypeNames.Strings = (
     'Unknown'
