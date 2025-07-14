@@ -49,7 +49,15 @@ object SyntAnal4: TLibSyntAnalyzer
       Font.Style = [fsBold]
     end
     item
-      DisplayName = 'Id special'
+      DisplayName = 'Id type'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id modifier'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clOlive
       Font.Height = -13
@@ -57,9 +65,9 @@ object SyntAnal4: TLibSyntAnalyzer
       Font.Style = []
     end
     item
-      DisplayName = 'Id types'
+      DisplayName = 'Id preproc'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clPurple
+      Font.Color = clBlue
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
@@ -136,7 +144,7 @@ object SyntAnal4: TLibSyntAnalyzer
       DisplayName = 'Id'
       StyleName = 'Id'
       TokenType = 2
-      Expression = '[a-z_][\w\$]*|\$\w+'
+      Expression = '[a-z_]\w*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -183,6 +191,14 @@ object SyntAnal4: TLibSyntAnalyzer
       StyleName = 'Id'
       TokenType = 6
       Expression = '@[a-z_]\w*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '$Id'
+      StyleName = 'Id'
+      TokenType = 7
+      Expression = '\$[a-z_]\w*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -244,43 +260,6 @@ object SyntAnal4: TLibSyntAnalyzer
       ConditionList = <
         item
           TagList.Strings = (
-            '$alignof'
-            '$assert'
-            '$assignable'
-            '$case'
-            '$default'
-            '$defined'
-            '$echo'
-            '$else'
-            '$embed'
-            '$endfor'
-            '$endforeach'
-            '$endif'
-            '$endswitch'
-            '$error'
-            '$eval'
-            '$exec'
-            '$extnameof'
-            '$feature'
-            '$for'
-            '$foreach'
-            '$if'
-            '$include'
-            '$is_const'
-            '$nameof'
-            '$offsetof'
-            '$qnameof'
-            '$sizeof'
-            '$stringify'
-            '$switch'
-            '$typefrom'
-            '$typeof'
-            '$vaarg'
-            '$vaconst'
-            '$vacount'
-            '$vaexpr'
-            '$vasplat'
-            '$vatype'
             'alias'
             'asm'
             'assert'
@@ -325,7 +304,7 @@ object SyntAnal4: TLibSyntAnalyzer
     end
     item
       DisplayName = 'id types'
-      StyleName = 'Id types'
+      StyleName = 'Id type'
       BlockType = btTagDetect
       ConditionList = <
         item
@@ -361,7 +340,7 @@ object SyntAnal4: TLibSyntAnalyzer
     end
     item
       DisplayName = 'id modifiers'
-      StyleName = 'Id special'
+      StyleName = 'Id modifier'
       BlockType = btTagDetect
       ConditionList = <
         item
@@ -404,6 +383,55 @@ object SyntAnal4: TLibSyntAnalyzer
             '@weak'
             '@winmain')
           TokenTypes = 64
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'id preproc'
+      StyleName = 'Id preproc'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '$alignof'
+            '$assert'
+            '$assignable'
+            '$case'
+            '$default'
+            '$defined'
+            '$echo'
+            '$else'
+            '$embed'
+            '$endfor'
+            '$endforeach'
+            '$endif'
+            '$endswitch'
+            '$error'
+            '$eval'
+            '$exec'
+            '$extnameof'
+            '$feature'
+            '$for'
+            '$foreach'
+            '$if'
+            '$include'
+            '$is_const'
+            '$nameof'
+            '$offsetof'
+            '$qnameof'
+            '$sizeof'
+            '$stringify'
+            '$switch'
+            '$typefrom'
+            '$typeof'
+            '$vaarg'
+            '$vaconst'
+            '$vacount'
+            '$vaexpr'
+            '$vasplat'
+            '$vatype')
+          TokenTypes = 128
         end>
       HighlightPos = cpAny
       IgnoreAsParent = False
@@ -500,7 +528,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 638
+          TokenTypes = 766
         end
         item
           TagList.Strings = (
@@ -584,7 +612,7 @@ object SyntAnal4: TLibSyntAnalyzer
     'String'
     'Number'
     '@Id'
-    '--'
+    '$Id'
     'Symbol {}'
     'Symbol ()'
     'Symbol ;')
