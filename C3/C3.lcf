@@ -446,7 +446,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 638
+          TokenTypes = 766
         end
         item
           TagList.Strings = (
@@ -472,7 +472,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 638
+          TokenTypes = 766
         end
         item
           TagList.Strings = (
@@ -502,7 +502,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 638
+          TokenTypes = 766
         end
         item
           TagList.Strings = (
