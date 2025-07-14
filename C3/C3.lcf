@@ -418,25 +418,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 2
-        end
-        item
-          TagList.Strings = (
-            ')')
-          TokenTypes = 512
-        end
-        item
-          CondType = tcSkip
-          TokenTypes = 62
-        end
-        item
-          TagList.Strings = (
-            '(')
-          TokenTypes = 512
-        end
-        item
-          CondType = tcSkip
-          TokenTypes = 14
+          TokenTypes = 2622
         end
         item
           TagList.Strings = (
@@ -462,14 +444,12 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 2
-        end
-        item
-          TokenTypes = 4
+          TokenTypes = 2574
         end
         item
           TagList.Strings = (
             'bitstruct'
+            'interface'
             'struct'
             'union')
           TokenTypes = 4
@@ -494,7 +474,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 14
+          TokenTypes = 2574
         end
         item
           TagList.Strings = (
@@ -520,7 +500,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 526
+          TokenTypes = 2574
         end
         item
           TagList.Strings = (
@@ -528,7 +508,7 @@ object SyntAnal4: TLibSyntAnalyzer
           TokenTypes = 4
         end>
       BlockEnd = '}'
-      NameFmt = '%s-1'
+      NameFmt = '%s-1~[(]1'
       RefToCondEnd = True
       HighlightPos = cpAny
       CancelNextRules = True
@@ -575,30 +555,23 @@ object SyntAnal4: TLibSyntAnalyzer
       SyntAnalyzer = SyntAnal1
     end>
   SampleText.Strings = (
-    'fn void func1(char[] name) //comment'
+    'fn void test1(char[] name) @inline <* doc comment *> //comment'
     '{'
-    '    printf("Hello, %s!\n", name);'
     '    uint v = 0x20_30u64 + 2_0u128 + 2UL + 2LL; '
-    '    float f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx;  @wrongid @inline'
+    '    float f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx; '
+    '    printf("Hello, %s!\n", name);'
     '}'
     ''
-    '<* doc comment *>'
     'macro DEFINE_GET_SET(type, name)'
     '{'
-    '    fn type get_##name(this)'
+    '    fn type get_##name(this) @dynamic'
     '    {'
     '        return this.name;'
-    '    }'
-    ''
-    '    fn void set_##name(this, type value)'
-    '    {'
-    '        this.name = value;'
     '    }'
     '}'
     ''
     'struct MyStruct'
     '{'
-    '    int my_field;'
     '    DEFINE_GET_SET(int, my_field);'
     '}')
   TokenTypeNames.Strings = (
@@ -608,8 +581,8 @@ object SyntAnal4: TLibSyntAnalyzer
     'Symbol'
     'String'
     'Number'
-    'Preprocessor'
-    'Id keyword'
+    '--'
+    '--'
     'Symbol {}'
     'Symbol ()'
     'Symbol ;'
