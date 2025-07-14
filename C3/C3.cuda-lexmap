@@ -8,13 +8,14 @@ styles_cmt=Comment
 styles_str=String
 
 [map]
+Comment=Comment
 Symbol=Symbol
 Number=Number
 String=String
-Comment=Comment
 Id=Id
 Id keyword=IdKeyword
 Id special=Id3
 Id types=Id2
 Asm BG=IncludeBG1
 Incorrect=IdBad
+Comment doc=CommentDoc

@@ -83,13 +83,21 @@ object SyntAnal4: TLibSyntAnalyzer
       Font.Style = []
       BorderTypeBottom = blSolid
       BorderColorBottom = clRed
+    end
+    item
+      DisplayName = 'Comment doc'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 8236428
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
     end>
   TokenRules = <
     item
-      DisplayName = 'String'
-      StyleName = 'String'
-      TokenType = 4
-      Expression = '"(\\.|.)*?("|$)'
+      DisplayName = 'Comment line'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '//.*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -102,10 +110,18 @@ object SyntAnal4: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'Comment line'
-      StyleName = 'Comment'
+      DisplayName = 'Comment doc'
+      StyleName = 'Comment doc'
       TokenType = 1
-      Expression = '//.*'
+      Expression = '(?s)<\*.*?(\*>|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '"(\\.|.)*?("|$)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -465,7 +481,7 @@ object SyntAnal4: TLibSyntAnalyzer
       BlockEnd = '}'
       NameFmt = '%s-1~[(]1'
       RefToCondEnd = True
-      HighlightPos = cpBound
+      HighlightPos = cpAny
       CancelNextRules = True
       CollapseFmt = '%sz0 ...'
       TreeItemImage = 5
@@ -550,7 +566,7 @@ object SyntAnal4: TLibSyntAnalyzer
       HighlightPos = cpAny
       CancelNextRules = True
       CollapseFmt = '%sz0 ...'
-      TreeItemImage = 2
+      TreeItemImage = 6
       IgnoreAsParent = False
     end
     item
@@ -592,12 +608,11 @@ object SyntAnal4: TLibSyntAnalyzer
       SyntAnalyzer = SyntAnal1
     end>
   SampleText.Strings = (
-    '//comment'
-    'fn void greet(char[] name)'
+    'fn void func1(char[] name) //comment'
     '{'
     '    printf("Hello, %s!\n", name);'
-    '    v = 0x20_30u64 + 2_0u128 + 2UL + 2LL '
-    '    f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx'
+    '    uint v = 0x20_30u64 + 2_0u128 + 2UL + 2LL; '
+    '    float f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx;'
     '}'
     ''
     'macro DEFINE_GET_SET(type, name)'
