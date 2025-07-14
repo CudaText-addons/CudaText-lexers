@@ -179,10 +179,10 @@ object SyntAnal4: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'Modifier'
+      DisplayName = '@Id'
       StyleName = 'Id'
-      TokenType = 11
-      Expression = '@[a-z]\w*'
+      TokenType = 6
+      Expression = '@[a-z_]\w*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -403,7 +403,7 @@ object SyntAnal4: TLibSyntAnalyzer
             '@used'
             '@weak'
             '@winmain')
-          TokenTypes = 2048
+          TokenTypes = 64
         end>
       HighlightPos = cpAny
       IgnoreAsParent = False
@@ -418,7 +418,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 2622
+          TokenTypes = 638
         end
         item
           TagList.Strings = (
@@ -444,7 +444,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 2574
+          TokenTypes = 638
         end
         item
           TagList.Strings = (
@@ -474,7 +474,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 2574
+          TokenTypes = 638
         end
         item
           TagList.Strings = (
@@ -500,7 +500,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 2574
+          TokenTypes = 638
         end
         item
           TagList.Strings = (
@@ -555,7 +555,9 @@ object SyntAnal4: TLibSyntAnalyzer
       SyntAnalyzer = SyntAnal1
     end>
   SampleText.Strings = (
-    'fn void test1(char[] name) @inline <* doc comment *> //comment'
+    
+      'fn void test(char[] name) @inline @some <* doc comment *> //comm' +
+      'ent'
     '{'
     '    uint v = 0x20_30u64 + 2_0u128 + 2UL + 2LL; '
     '    float f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx; '
@@ -564,7 +566,7 @@ object SyntAnal4: TLibSyntAnalyzer
     ''
     'macro DEFINE_GET_SET(type, name)'
     '{'
-    '    fn type get_##name(this) @dynamic'
+    '    fn type get_##name(this)'
     '    {'
     '        return this.name;'
     '    }'
@@ -581,12 +583,11 @@ object SyntAnal4: TLibSyntAnalyzer
     'Symbol'
     'String'
     'Number'
-    '--'
+    '@Id'
     '--'
     'Symbol {}'
     'Symbol ()'
-    'Symbol ;'
-    'Modifier')
+    'Symbol ;')
   Extentions = 'c3 c3i c3t'
   LexerName = 'C3'
   Notes.Strings = (
