@@ -179,6 +179,14 @@ object SyntAnal4: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
+      DisplayName = 'Modifier'
+      StyleName = 'Id'
+      TokenType = 11
+      Expression = '@[a-z]\w*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
       DisplayName = 'Symbol ;'
       StyleName = 'Symbol'
       TokenType = 10
@@ -316,68 +324,6 @@ object SyntAnal4: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
-      DisplayName = 'id modifiers'
-      StyleName = 'Id special'
-      BlockType = btTagDetect
-      ConditionList = <
-        item
-          TagList.Strings = (
-            'align'
-            'benchmark'
-            'bigendian'
-            'builtin'
-            'callconv'
-            'compact'
-            'const'
-            'deprecated'
-            'dynamic'
-            'export'
-            'extern'
-            'finalizer'
-            'format'
-            'init'
-            'inline'
-            'link'
-            'littleendian'
-            'local'
-            'maydiscard'
-            'naked'
-            'noalias'
-            'nodiscard'
-            'noinit'
-            'noinline'
-            'nopadding'
-            'norecurse'
-            'noreturn'
-            'nosanitize'
-            'nostrip'
-            'obfuscate'
-            'operator'
-            'operator_r'
-            'operator_s'
-            'optional'
-            'overlap'
-            'packed'
-            'private'
-            'public'
-            'pure'
-            'reflect'
-            'safemacro'
-            'section'
-            'static'
-            'tag'
-            'tlocal'
-            'unused'
-            'used'
-            'wasm'
-            'weak'
-            'winmain')
-          TokenTypes = 4
-        end>
-      HighlightPos = cpAny
-      IgnoreAsParent = False
-    end
-    item
       DisplayName = 'id types'
       StyleName = 'Id types'
       BlockType = btTagDetect
@@ -409,6 +355,55 @@ object SyntAnal4: TLibSyntAnalyzer
             'usz'
             'void')
           TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'id modifiers'
+      StyleName = 'Id special'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '@align'
+            '@benchmark'
+            '@BigEndian'
+            '@Builtin'
+            '@callconv'
+            '@deprecated'
+            '@dynamic'
+            '@export'
+            '@extern'
+            '@if'
+            '@inline'
+            '@interface'
+            '@LittleEndian'
+            '@Local'
+            '@maydiscard'
+            '@naked'
+            '@NODISCARD'
+            '@noinit'
+            '@noinline'
+            '@NoReturn'
+            '@nostrip'
+            '@obfuscate'
+            '@operator'
+            '@optional'
+            '@Overlap'
+            '@PACKED'
+            '@priority'
+            '@Private'
+            '@public'
+            '@pure'
+            '@reflect'
+            '@section'
+            '@test'
+            '@unused'
+            '@used'
+            '@weak'
+            '@winmain')
+          TokenTypes = 2048
         end>
       HighlightPos = cpAny
       IgnoreAsParent = False
@@ -584,7 +579,7 @@ object SyntAnal4: TLibSyntAnalyzer
     '{'
     '    printf("Hello, %s!\n", name);'
     '    uint v = 0x20_30u64 + 2_0u128 + 2UL + 2LL; '
-    '    float f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx;'
+    '    float f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx;  @wrongid @inline'
     '}'
     ''
     '<* doc comment *>'
@@ -617,7 +612,8 @@ object SyntAnal4: TLibSyntAnalyzer
     'Id keyword'
     'Symbol {}'
     'Symbol ()'
-    'Symbol ;')
+    'Symbol ;'
+    'Modifier')
   Extentions = 'c3 c3i c3t'
   LexerName = 'C3'
   Notes.Strings = (
