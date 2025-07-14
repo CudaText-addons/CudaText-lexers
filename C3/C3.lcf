@@ -216,7 +216,15 @@ object SyntAnal4: TLibSyntAnalyzer
       DisplayName = 'Char'
       StyleName = 'String'
       TokenType = 4
-      Expression = #39'.*?('#39'|$)'
+      Expression = #39'(\\.|.)*?('#39'|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String raw'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '`(``|.)*?(`|$)'
       ColumnFrom = 0
       ColumnTo = 0
     end>
@@ -294,10 +302,8 @@ object SyntAnal4: TLibSyntAnalyzer
             'nextcase'
             'null'
             'return'
-            'static'
             'struct'
             'switch'
-            'tlocal'
             'true'
             'try'
             'typedef'
@@ -396,7 +402,9 @@ object SyntAnal4: TLibSyntAnalyzer
             'reflect'
             'safemacro'
             'section'
+            'static'
             'tag'
+            'tlocal'
             'unused'
             'used'
             'wasm'
@@ -419,6 +427,7 @@ object SyntAnal4: TLibSyntAnalyzer
             'bool'
             'char'
             'double'
+            'evaltype'
             'fault'
             'float'
             'float128'
@@ -430,13 +439,16 @@ object SyntAnal4: TLibSyntAnalyzer
             'isz'
             'long'
             'short'
+            'typefrom'
             'typeid'
+            'typeof'
             'uint'
             'uint128'
             'ulong'
             'uptr'
             'ushort'
             'usz'
+            'vatype'
             'void')
           TokenTypes = 4
         end>
@@ -504,7 +516,9 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           TagList.Strings = (
-            'struct')
+            'bitstruct'
+            'struct'
+            'union')
           TokenTypes = 4
         end>
       BlockEnd = '}'
@@ -615,6 +629,7 @@ object SyntAnal4: TLibSyntAnalyzer
     '    float f = 1_2.3_4e5f64xx + 0xF_Ap20f64xx;'
     '}'
     ''
+    '<* doc comment *>'
     'macro DEFINE_GET_SET(type, name)'
     '{'
     '    fn type get_##name(this)'
