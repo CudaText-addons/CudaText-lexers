@@ -316,44 +316,6 @@ object SyntAnal4: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
-      DisplayName = 'id keywords compile-time'
-      StyleName = 'Id keyword'
-      BlockType = btTagDetect
-      ConditionList = <
-        item
-          TagList.Strings = (
-            'alignof'
-            'assignable'
-            'defined'
-            'echo'
-            'embed'
-            'endfor'
-            'endforeach'
-            'endif'
-            'endswitch'
-            'error'
-            'eval'
-            'exec'
-            'extnameof'
-            'feature'
-            'include'
-            'is_const'
-            'nameof'
-            'offsetof'
-            'qnameof'
-            'sizeof'
-            'stringify'
-            'vaarg'
-            'vaconst'
-            'vacount'
-            'vaexpr'
-            'vasplat')
-          TokenTypes = 4
-        end>
-      HighlightPos = cpAny
-      IgnoreAsParent = False
-    end
-    item
       DisplayName = 'id modifiers'
       StyleName = 'Id special'
       BlockType = btTagDetect
@@ -427,7 +389,6 @@ object SyntAnal4: TLibSyntAnalyzer
             'bool'
             'char'
             'double'
-            'evaltype'
             'fault'
             'float'
             'float128'
@@ -439,16 +400,13 @@ object SyntAnal4: TLibSyntAnalyzer
             'isz'
             'long'
             'short'
-            'typefrom'
             'typeid'
-            'typeof'
             'uint'
             'uint128'
             'ulong'
             'uptr'
             'ushort'
             'usz'
-            'vatype'
             'void')
           TokenTypes = 4
         end>
