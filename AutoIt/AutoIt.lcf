@@ -207,7 +207,7 @@ object SyntAnal2: TLibSyntAnalyzer
       DisplayName = 'Macro'
       StyleName = 'Macro'
       TokenType = 7
-      Expression = '\@\w+'
+      Expression = '@[a-z_]\w*'
       ColumnFrom = 0
       ColumnTo = 0
     end>
@@ -223,11 +223,9 @@ object SyntAnal2: TLibSyntAnalyzer
             'And'
             'ByRef'
             'Case'
-            'Const'
             'ContinueCase'
             'ContinueLoop'
             'Default'
-            'Dim'
             'Do'
             'Else'
             'ElseIf'
@@ -242,15 +240,12 @@ object SyntAnal2: TLibSyntAnalyzer
             'False'
             'For'
             'Func'
-            'Global'
             'If'
             'In'
-            'Local'
             'Next'
             'Not'
             'Null'
             'Or'
-            'ReDim'
             'Return'
             'Select'
             'Static'
@@ -273,17 +268,17 @@ object SyntAnal2: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
-      DisplayName = 'Dim'
+      DisplayName = 'Keywords dim'
       StyleName = 'Dim'
       AlwaysEnabled = True
       BlockType = btTagDetect
       ConditionList = <
         item
           TagList.Strings = (
-            'Const'
+            'const'
             'dim'
-            'Global'
-            'Local'
+            'global'
+            'local'
             'redim')
           TokenTypes = 1
           IgnoreCase = True
@@ -554,14 +549,13 @@ object SyntAnal2: TLibSyntAnalyzer
     end
     item
       DisplayName = 'region'
-      StyleName = 'Comment'
       ConditionList = <
         item
           TokenTypes = 1024
         end>
       BlockEnd = 'region end'
       DisplayInTree = False
-      HighlightPos = cpRange
+      HighlightPos = cpAny
       DrawStaple = True
       IgnoreAsParent = False
     end
@@ -595,10 +589,7 @@ object SyntAnal2: TLibSyntAnalyzer
     '#comments-start test'
     '  If SetIcon ($btnIcon, $sModulesPath & "\") Then _'
     #9'$bIsDefaultIcon = True'
-    '  #cs test'
-    '    test'
-    '  #ce'
-    '#comments-end test'
+    'end #comments-end test'
     ''
     '#include'
     '#include-once'
