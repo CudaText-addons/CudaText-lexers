@@ -93,7 +93,7 @@ object SyntAnal2: TLibSyntAnalyzer
       DisplayName = 'Comment block 1'
       StyleName = 'Comment'
       TokenType = 1
-      Expression = '(?s)\#comments\-start\b.*?\#comments-end\b'
+      Expression = '(?s)\#comments\-start\b.*?^[\x20\x09]*\#comments-end\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -101,7 +101,7 @@ object SyntAnal2: TLibSyntAnalyzer
       DisplayName = 'Comment block 2'
       StyleName = 'Comment'
       TokenType = 1
-      Expression = '(?s)\#cs\b.*?\#ce\b'
+      Expression = '(?s)\#cs\b.*?^[\x20\x09]*\#ce\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
