@@ -126,9 +126,9 @@ object SyntAnal2: TLibSyntAnalyzer
       StyleName = 'Preprocessor'
       TokenType = 12
       Expression = 
-        '\#(include(\-once)?|region|endRegion|OnAutoItStartRegister|AutoI' +
-        't3Wrapper_\w+|notrayicon|requireadmin|force[dr]ef|ignorefunc|pra' +
-        'gma)\b'#13#10
+        '\#(include(\-once)?|region|endRegion|OnAutoItStartRegister|notra' +
+        'yicon|requireadmin|force[dr]ef|ignorefunc|pragma|AutoIt3Wrapper_' +
+        '\w+|Au3stripper_\w+|tidy_parameters|tidy_ILC_pos)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
