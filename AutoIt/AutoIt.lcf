@@ -106,7 +106,7 @@ object SyntAnal2: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'Rgn start'
+      DisplayName = 'Region start'
       StyleName = 'Preprocessor'
       TokenType = 10
       Expression = '\#region\b'
@@ -114,7 +114,7 @@ object SyntAnal2: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'Rng end'
+      DisplayName = 'Region end'
       StyleName = 'Preprocessor'
       TokenType = 11
       Expression = '\#endregion\b'
@@ -123,12 +123,9 @@ object SyntAnal2: TLibSyntAnalyzer
     end
     item
       DisplayName = 'Preprocessor'
-      StyleName = 'Preprocessor'
+      StyleName = 'Id'
       TokenType = 12
-      Expression = 
-        '\#(include(\-once)?|region|endRegion|OnAutoItStartRegister|notra' +
-        'yicon|requireadmin|force[dr]ef|ignorefunc|pragma|AutoIt3Wrapper_' +
-        '\w+|Au3stripper_\w+|tidy_parameters|tidy_ILC_pos)\b'
+      Expression = '\#[a-z][\w\-]+'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -284,6 +281,100 @@ object SyntAnal2: TLibSyntAnalyzer
           IgnoreCase = True
         end>
       DynHighlight = dhRange
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Preprocessor cmds'
+      StyleName = 'Preprocessor'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '#Au3Stripper_AlwaysStrip_Off'
+            '#Au3Stripper_AlwaysStrip_On'
+            '#Au3Stripper_Ignore_Errors_in_Funcs'
+            '#Au3Stripper_Ignore_Funcs'
+            '#Au3Stripper_Ignore_Variables'
+            '#Au3Stripper_Off'
+            '#Au3Stripper_On'
+            '#Au3Stripper_parameters'
+            '#AutoIt3Wrapper_Add_Constants'
+            '#AutoIt3Wrapper_Au3Check_Parameters'
+            '#AutoIt3Wrapper_Au3Check_Stop_OnWarning'
+            '#AutoIt3Wrapper_Au3stripper_OnError'
+            '#AutoIt3Wrapper_Aut2exe'
+            '#AutoIt3Wrapper_AutoIt3'
+            '#AutoIt3Wrapper_Autoit3Dir'
+            '#AutoIt3Wrapper_Change2CUI'
+            '#AutoIt3Wrapper_Compile_both'
+            '#AutoIt3Wrapper_Compression'
+            '#AutoIt3Wrapper_EndIf'
+            '#AutoIt3Wrapper_Icon'
+            '#Autoit3Wrapper_If_Compile'
+            '#AutoIt3Wrapper_If_Run'
+            '#AutoIt3Wrapper_OutFile'
+            '#AutoIt3Wrapper_OutFile_Type'
+            '#AutoIt3Wrapper_OutFile_X64'
+            '#AutoIt3Wrapper_Res_Comment'
+            '#AutoIt3Wrapper_Res_CompanyName'
+            '#AutoIt3Wrapper_res_Compatibility'
+            '#AutoIt3Wrapper_Res_Cursors_Add'
+            '#AutoIt3Wrapper_Res_Description'
+            '#AutoIt3Wrapper_Res_Field'
+            '#AutoIt3Wrapper_Res_File_Add'
+            '#AutoIt3Wrapper_Res_Fileversion'
+            '#AutoIt3Wrapper_Res_FileVersion_AutoIncrement'
+            '#AutoIt3Wrapper_Res_Fileversion_First_Increment'
+            '#AutoIt3Wrapper_Res_Fileversion_Use_Template'
+            '#AutoIt3Wrapper_Res_HiDpi'
+            '#AutoIt3Wrapper_Res_Icon_Add'
+            '#AutoIt3Wrapper_Res_Language'
+            '#AutoIt3Wrapper_Res_LegalCopyright'
+            '#AutoIt3Wrapper_Res_LegalTrademarks'
+            '#AutoIt3Wrapper_Res_ProductName'
+            '#AutoIt3Wrapper_Res_ProductVersion'
+            '#AutoIt3Wrapper_Res_Remove'
+            '#AutoIt3Wrapper_res_requestedExecutionLevel'
+            '#AutoIt3Wrapper_Res_SaveSource'
+            '#AutoIt3Wrapper_Run_After'
+            '#AutoIt3Wrapper_Run_After_Admin'
+            '#AutoIt3Wrapper_Run_Au3Check'
+            '#AutoIt3Wrapper_Run_Au3Stripper'
+            '#AutoIt3Wrapper_Run_Before'
+            '#AutoIt3Wrapper_Run_Before_Admin'
+            '#AutoIt3Wrapper_Run_Debug'
+            '#AutoIt3Wrapper_Run_Debug_Mode'
+            '#AutoIt3Wrapper_Run_SciTE_Minimized'
+            '#AutoIt3Wrapper_Run_SciTE_OutputPane_Minimized'
+            '#AutoIt3Wrapper_Run_Stop_OnError'
+            '#AutoIt3Wrapper_Run_Tidy'
+            '#AutoIt3Wrapper_ShowGui'
+            '#AutoIt3Wrapper_ShowProgress'
+            '#Autoit3Wrapper_Testing'
+            '#AutoIt3Wrapper_Tidy_Stop_OnError'
+            '#AutoIt3Wrapper_UPX_Parameters'
+            '#AutoIt3Wrapper_UseUpx'
+            '#AutoIt3Wrapper_UseX64'
+            '#AutoIt3Wrapper_Version'
+            '#AutoIt3Wrapper_Versioning'
+            '#AutoIt3Wrapper_Versioning_Parameters'
+            '#endRegion'
+            '#forcedef'
+            '#forceref'
+            '#ignorefunc'
+            '#include'
+            '#include-once'
+            '#notrayicon'
+            '#OnAutoItStartRegister'
+            '#pragma'
+            '#region'
+            '#requireadmin'
+            '#Tidy_ILC_Pos'
+            '#Tidy_Parameters')
+          TokenTypes = 4096
+          IgnoreCase = True
+        end>
       HighlightPos = cpAny
       IgnoreAsParent = False
     end
@@ -577,14 +668,14 @@ object SyntAnal2: TLibSyntAnalyzer
     '    ['#39';'#39', Asc('#39';'#39')], _ ; This comment'
     '    ["", 0]]           ; comment'
     ''
-    ' #region'#9#9'Begin region '
+    ' #region Begin region '
     #9';'#9'#endregion'
     #9'If @error Then'
     #9#9'If @error = 2 Then $iMinIndex = $i'
     #9'Else'
     #9#9'Exit'
     #9'EndIf '
-    ' #endregion'#9'End region'
+    ' #endregion End region'
     ''
     '#comments-start test'
     '  If SetIcon ($btnIcon, $sModulesPath & "\") Then _'
@@ -595,6 +686,7 @@ object SyntAnal2: TLibSyntAnalyzer
     '#include-once'
     '#NoTrayIcon'
     '#RequireAdmin'
+    '#wrong'
     ''
     'Func Test()'
     '  While $zzz <= 2'
@@ -625,7 +717,7 @@ object SyntAnal2: TLibSyntAnalyzer
   LexerName = 'AutoIt'
   Notes.Strings = (
     'Original by: 480499497, http://forum.wincmd.ru'
-    'Reworked: Alexey Torgashin (CudaText)')
+    'Reworked by: Alexey Torgashin (CudaText)')
   LineComment = ';'
   Charset = DEFAULT_CHARSET
 end
