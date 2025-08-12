@@ -122,12 +122,18 @@ object SyntAnal6: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
+      DisplayName = 'Number hex'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '\$\h+\b|@[01]+\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
       DisplayName = 'Number'
       StyleName = 'Number'
       TokenType = 5
-      Expression = 
-        '(((\d+\.?\d*)|(\.\d+))(e(\+|\-)?\d+)?)(L|UL|U|F)?|(\$[a-zA-Z0-9]' +
-        '+)|(@[0|1]+)\b'
+      Expression = '(((\d+\.?\d*)|(\.\d+))(e(\+|\-)?\d+)?)(L|UL|U|F)?\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -459,7 +465,7 @@ object SyntAnal6: TLibSyntAnalyzer
   Notes.Strings = (
     'Original not completed work by: Stoomkracht from CudaText forum'
     'Completed by: Alexey Torgashin (CudaText) '
-    'Keywords list from: https://github.com/scomx/cvbasic-vscode-ext')
+    'Keywords from: https://github.com/scomx/cvbasic-vscode-ext')
   LineComment = #39
   Charset = DEFAULT_CHARSET
 end
