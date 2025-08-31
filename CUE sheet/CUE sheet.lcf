@@ -54,9 +54,17 @@ object SyntAnal7: TLibSyntAnalyzer
       StyleName = 'Id keyword'
       TokenType = 2
       Expression = 
-        '(?-i)\b(CATALOG|CDTEXTFILE|FILE|FLAGS|INDEX|ISRC|PERFORMER|(POST' +
-        '|PRE)GAP|REM\x20(GENRE|DATE|DISCID|DISCNUMBER|TOTALDISCS|COMMENT' +
-        ')|SONGWRITER|TITLE|TRACK)\b'
+        '(?-i)\b(CATALOG|CDTEXTFILE|FLAGS|INDEX|ISRC|PERFORMER|(POST|PRE)' +
+        'GAP|REM\x20(GENRE|DATE|DISCID|DISCNUMBER|TOTALDISCS|COMMENT)|SON' +
+        'GWRITER|TITLE)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id keywords folding'
+      StyleName = 'Id keyword'
+      TokenType = 1
+      Expression = '(?-i)\b(FILE|TRACK)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -118,7 +126,21 @@ object SyntAnal7: TLibSyntAnalyzer
       ColumnFrom = 0
       ColumnTo = 0
     end>
-  BlockRules = <>
+  BlockRules = <
+    item
+      DisplayName = 'Folding'
+      ConditionList = <
+        item
+          TokenTypes = 2
+        end>
+      EndOfTextClose = True
+      DisplayInTree = False
+      HighlightPos = cpAny
+      DrawStaple = True
+      GroupIndex = 20
+      CollapseFmt = '%sz0 ...'
+      IgnoreAsParent = False
+    end>
   CodeTemplates = <>
   SubAnalyzers = <>
   SampleText.Strings = (
@@ -138,7 +160,7 @@ object SyntAnal7: TLibSyntAnalyzer
     '    INDEX 01 04:17:52')
   TokenTypeNames.Strings = (
     'Unknown'
-    'Comment'
+    '^Id'
     'Id'
     'String'
     'Number'
