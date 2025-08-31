@@ -55,8 +55,8 @@ object SyntAnal7: TLibSyntAnalyzer
       TokenType = 2
       Expression = 
         '(?-i)\b(CATALOG|CDTEXTFILE|FILE|FLAGS|INDEX|ISRC|PERFORMER|(POST' +
-        '|PRE)GAP|REM\s(GENRE|DATE|DISCID|DISCNUMBER|TOTALDISCS|COMMENT)|' +
-        'SONGWRITER|TITLE|TRACK)\b'
+        '|PRE)GAP|REM\x20(GENRE|DATE|DISCID|DISCNUMBER|TOTALDISCS|COMMENT' +
+        ')|SONGWRITER|TITLE|TRACK)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
