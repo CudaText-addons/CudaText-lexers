@@ -1,0 +1,7 @@
+[info]
+title=CUE sheet
+type=lexer
+subdir=-
+
+[lexer1]
+file=CUE sheet
