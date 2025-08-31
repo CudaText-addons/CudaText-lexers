@@ -1,0 +1,7 @@
+[info]
+title=CUE
+type=lexer
+subdir=-
+
+[lexer1]
+file=CUE
