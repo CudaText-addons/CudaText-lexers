@@ -1,0 +1,461 @@
+object SyntAnal19: TLibSyntAnalyzer
+  Formats = <
+    item
+      DisplayName = 'Number'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'String'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clTeal
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Symbol'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Comment'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Id'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Id types'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id modifiers'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clOlive
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Pragma'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end>
+  TokenRules = <
+    item
+      DisplayName = 'Comment'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '\-\-.*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment block'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)/\-.*?(\-/|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '^Id lambda'
+      StyleName = 'Id keyword'
+      TokenType = 2
+      Expression = #955
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id.Id'
+      StyleName = 'Id'
+      TokenType = 2
+      Expression = '(?-i)(?<=def\x20+)[a-zA-Z_]\w*\.\w+'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '^Id'
+      StyleName = 'Id'
+      TokenType = 6
+      Expression = 
+        '(?<=^[\x20\x09]*)([a-z'#913'-'#937#945'-'#969'_][a-z'#913'-'#937#945'-'#969'_0-9]*|`+[^`]*`+|'#171'[^'#187']*'#187 +
+        ')'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id'
+      StyleName = 'Id'
+      TokenType = 2
+      Expression = '[a-z'#913'-'#937#945'-'#969'_][a-z'#913'-'#937#945'-'#969'_0-9]*'#39'?|`+[^`]*`+|'#171'[^'#187']*'#187
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol ( )'
+      StyleName = 'Symbol'
+      TokenType = 3
+      Expression = '[\(\)]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol'
+      StyleName = 'Symbol'
+      TokenType = 3
+      Expression = 
+        '\#\[|::|<\||\|>|\+\+|'#13#10'\&\&\&|\|\|\||\^\^\^|~~~|>>>|<<<|'#13#10'\&\&|\' +
+        '|\||\/\\|\\\/|<->|<\$>|'#13#10'['#8743#8744#8892#8893#8891#8596#8660#8658#8656']|'#13#10'['#8712#8713#8745#8746#8834#8835#8838#8839'\\'#8726#8852#9653']|'#13#10'>>=|~~>' +
+        '|'#13#10#8853'|'#215'|'#8728'|'#9675'|'#8315#185'|'#172'|~|'#13#10'[='#8800#8776#8799#8801#11037#9656#9657']|=\?=|'#13#10'[\-\+\*/'#247'%\^'#8730#8728']|'#13#10#8707'!|'#8707'|'#8704'|'#928 +
+        '|'#931'|'#13#10':=?|=>|'#8614'|->|'#8594'|'#183'|'#8592'|<-|'#13#10'==|!=|<=|>=|[<>'#8804#8805']|'#13#10'[\[\]\{\}\?!=\|' +
+        '\.,%@&]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '(["'#39'])(\\.|.)*?(\1|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Number decimal'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '\b(\d+|0x\h+)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Pragma'
+      StyleName = 'Pragma'
+      Expression = '\#\w+'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end>
+  BlockRules = <
+    item
+      DisplayName = 'Id keywords'
+      StyleName = 'Id keyword'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'abbrev'
+            'abbreviation'
+            'alias'
+            'and'
+            'assume'
+            'at'
+            'attribute'
+            'axiom'
+            'axioms'
+            'begin'
+            'break'
+            'by'
+            'calc'
+            'check'
+            'class'
+            'classes'
+            'coinductive'
+            'cond'
+            'constant'
+            'constants'
+            'continue'
+            'def'
+            'definition'
+            'dite'
+            'do'
+            'else'
+            'end'
+            'eval'
+            'example'
+            'exists'
+            'exit'
+            'export'
+            'exposing'
+            'extends'
+            'find'
+            'for'
+            'forall'
+            'from'
+            'fun'
+            'have'
+            'haveI'
+            'help'
+            'hiding'
+            'if'
+            'import'
+            'in'
+            'include'
+            'inductive'
+            'infix'
+            'infixl'
+            'infixr'
+            'instance'
+            'instances'
+            'ite'
+            'lemma'
+            'let'
+            'loop'
+            'macro'
+            'macro_rules'
+            'match'
+            'namespace'
+            'not'
+            'notation'
+            'obtain'
+            'omit'
+            'opaque'
+            'open'
+            'or'
+            'panic'
+            'parameter'
+            'parameters'
+            'postfix'
+            'precedence'
+            'prefix'
+            'prelude'
+            'print'
+            'raw'
+            'reduce'
+            'renaming'
+            'reserve'
+            'restate_axiom'
+            'return'
+            'run_cmd'
+            'section'
+            'set_option'
+            'show'
+            'start'
+            'structure'
+            'suffices'
+            'syntax'
+            'then'
+            'theorem'
+            'theory'
+            'this'
+            'throw'
+            'universe'
+            'universes'
+            'using'
+            'variable'
+            'variables'
+            'where'
+            'while'
+            'with')
+          TokenTypes = 68
+        end>
+      HighlightPos = cpAny
+      TreeItemImage = 4
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Id types'
+      StyleName = 'Id types'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'And'
+            'Array'
+            'Bool'
+            'Char'
+            'Context'
+            'Empty'
+            'Eq'
+            'Except'
+            'Exception'
+            'False'
+            'Fin'
+            'Float'
+            'HEq'
+            'Int'
+            'List'
+            'MacroScopesView'
+            'Methods'
+            'MProd'
+            'Name'
+            'Nat'
+            'Option'
+            'Or'
+            'ParserDescr'
+            'PEmpty'
+            'PLift'
+            'Pos'
+            'PProd'
+            'Prod'
+            'Prop'
+            'PUnit'
+            'Result'
+            'SepArray'
+            'Sort'
+            'SourceInfo'
+            'State'
+            'String'
+            'Substring'
+            'Subtype'
+            'Syntax'
+            'Task'
+            'Thread'
+            'Thunk'
+            'True'
+            'TSepArray'
+            'TSyntax'
+            'Type'
+            'UInt16'
+            'UInt32'
+            'UInt64'
+            'UInt8'
+            'ULift'
+            'USize')
+          TokenTypes = 68
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Id modifiers'
+      StyleName = 'Id modifiers'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'bind'
+            'deriving'
+            'local'
+            'meta'
+            'mutual'
+            'noncomputable'
+            'partial'
+            'private'
+            'protected'
+            'pure'
+            'scoped'
+            'unsafe')
+          TokenTypes = 68
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Id consts'
+      StyleName = 'Id types'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'false'
+            'none'
+            'some'
+            'true')
+          TokenTypes = 68
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Block for tree'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'class'
+            'def'
+            'structure')
+          TokenTypes = 64
+        end>
+      EndOfTextClose = True
+      NameFmt = '%s0 %s-1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      DrawStaple = True
+      GroupIndex = 20
+      CollapseFmt = '%sz0 ...'
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Block'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'else'
+            'for'
+            'if'
+            'inductive'
+            'instance'
+            'while')
+          TokenTypes = 64
+        end>
+      EndOfTextClose = True
+      DisplayInTree = False
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      DrawStaple = True
+      GroupIndex = 20
+      CollapseFmt = '%sz0 ...'
+      IgnoreAsParent = False
+    end>
+  CodeTemplates = <>
+  SubAnalyzers = <>
+  SampleText.Strings = (
+    '/- Comment'
+    '-/'
+    'def buzz : String :='
+    '  "Buzz" + '#39'Test'#39
+    '-- Comment'
+    'def isDivisibleBy (n : Nat) (m : Nat) : Bool :='
+    '  match m with'
+    '  | 0 => false'
+    '  | (k + 1) => (n % (k + 1)) = 12 + 0xAB'
+    '#eval sum [1, 2]')
+  TokenTypeNames.Strings = (
+    '^Pragma'
+    'Comment'
+    'Id'
+    'Symbol'
+    'String'
+    'Number'
+    '^Id'
+    'Symbol ()')
+  Extentions = 'lean'
+  LexerName = 'Lean'
+  SkipSpaces = False
+  Notes.Strings = (
+    'Alexey Torgashin (CudaText)')
+  LineComment = '--'
+  Charset = DEFAULT_CHARSET
+end
