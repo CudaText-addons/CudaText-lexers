@@ -1,0 +1,15 @@
+[comments]
+str1=
+str2=
+styles_cmt=Comment
+styles_str=
+
+[map]
+Id=Id
+Comment=Comment
+Symbol=Symbol
+Number=Number
+Id special=IdKeyword
+IP address=IdVar
+Section=Label
+Section<>=String3
