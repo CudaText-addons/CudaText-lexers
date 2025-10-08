@@ -171,7 +171,7 @@ object SyntAnal19: TLibSyntAnalyzer
       DisplayName = 'Symbol'
       StyleName = 'Symbol'
       TokenType = 4
-      Expression = '\\.|\#\{|=>|'#13#10'[\(\)\[\]\{\}:%\$\#,<>\.=/\^\+\-!&@'#39'\\]'
+      Expression = '\\.|\#\{|=>|!=|'#13#10'[\(\)\[\]:%\$\#,<>\.=/\^\+\-!&@'#39'\\]'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -228,7 +228,7 @@ object SyntAnal19: TLibSyntAnalyzer
       DisplayName = 'Text'
       StyleName = 'Text'
       TokenType = 2
-      Expression = '[a-z][a-z0-9]*'
+      Expression = '[a-z][a-z0-9\-]*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -237,6 +237,14 @@ object SyntAnal19: TLibSyntAnalyzer
       StyleName = 'String'
       TokenType = 11
       Expression = '(?s)"(\\.|.)*?("|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol {}'
+      StyleName = 'Symbol'
+      TokenType = 10
+      Expression = '[\{\}]'
       ColumnFrom = 0
       ColumnTo = 0
     end>
@@ -307,6 +315,33 @@ object SyntAnal19: TLibSyntAnalyzer
         end>
       HighlightPos = cpAny
       CancelNextRules = True
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = '{'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 1024
+        end>
+      BlockEnd = '}'
+      DisplayInTree = False
+      HighlightPos = cpAny
+      DrawStaple = True
+      CollapseFmt = '{ ... }'
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = '}'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '}')
+          TokenTypes = 1024
+        end>
+      HighlightPos = cpAny
       IgnoreAsParent = False
     end>
   CodeTemplates = <>
@@ -405,6 +440,7 @@ object SyntAnal19: TLibSyntAnalyzer
     '  def a():'
     '    pass'
     '  ```.text'
+    '}'
     ''
     '```c return 0; ```'
     '```cpp return 0; ```'
@@ -420,7 +456,7 @@ object SyntAnal19: TLibSyntAnalyzer
     'Number'
     'Number unit'
     'Label'
-    '--'
+    'Symbol {}'
     'String'
     'Fence edge'
     '`begin'
