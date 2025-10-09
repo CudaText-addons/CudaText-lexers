@@ -213,6 +213,10 @@ object SyntAnal10: TLibSyntAnalyzer
     end>
   CodeTemplates = <>
   SubAnalyzers = <>
+  SampleText.Strings = (
+    '<section1> # Comment'
+    '[section2] system-view undo'
+    'some_id info-center enable 100.200.100.0 description 10:00 # Cmt')
   TokenTypeNames.Strings = (
     'Section'
     'Comment'
