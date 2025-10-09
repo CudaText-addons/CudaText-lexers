@@ -1,4 +1,4 @@
-object SyntAnal20: TLibSyntAnalyzer
+object SyntAnal10: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Id'
@@ -33,17 +33,41 @@ object SyntAnal20: TLibSyntAnalyzer
       Font.Style = [fsBold]
     end
     item
-      DisplayName = 'Id special'
+      DisplayName = 'Id 1'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlack
+      Font.Color = clGreen
       Font.Height = -13
       Font.Name = 'Courier New'
-      Font.Style = [fsBold]
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id 2'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id 3'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 4953026
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id 4'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clFuchsia
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
     end
     item
       DisplayName = 'IP address'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGreen
+      Font.Color = clBlue
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
@@ -121,13 +145,67 @@ object SyntAnal20: TLibSyntAnalyzer
     end>
   BlockRules = <
     item
-      DisplayName = 'Keyword'
-      StyleName = 'Id special'
+      DisplayName = 'Keywords 1'
+      StyleName = 'Id 1'
       BlockType = btTagDetect
       ConditionList = <
         item
           TagList.Strings = (
-            'interface')
+            'display'
+            'enable'
+            'interface'
+            'lldp'
+            'protocol'
+            'server'
+            'ssh'
+            'stelnet'
+            'stp'
+            'telnet')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Keywords 2'
+      StyleName = 'Id 2'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'deny'
+            'password'
+            'permit'
+            'shutdown'
+            'undo')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Keywords 3'
+      StyleName = 'Id 3'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'description'
+            'route-static')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Keywords 4'
+      StyleName = 'Id 4'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'info-center'
+            'system-view')
           TokenTypes = 4
         end>
       HighlightPos = cpAny
