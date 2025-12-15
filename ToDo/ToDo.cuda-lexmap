@@ -2,19 +2,18 @@
 str1=
 str2=
 styles_cmt=
-styles_str=
+styles_str=header,text
 
 [map]
 header=IdKeyword
 item.done=Id3
 item.cancel=Id1
 item.normal=Id4
-url=Symbol2
+url=Label
 @tag=LightBG5
 @critical=LightBG1
 @high=LightBG2
 @low=LightBG3
 @today=LightBG4
 @timestamp=TagProp
-text.grey=TagBound
-text.normal=Id
+text=Id

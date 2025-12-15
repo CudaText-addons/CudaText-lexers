@@ -1,4 +1,4 @@
-object SyntAnal20: TLibSyntAnalyzer
+object SyntAnal15: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'header'
@@ -36,7 +36,7 @@ object SyntAnal20: TLibSyntAnalyzer
     item
       DisplayName = 'url'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clSkyBlue
+      Font.Color = clFuchsia
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = [fsItalic]
@@ -94,15 +94,7 @@ object SyntAnal20: TLibSyntAnalyzer
       Font.Style = []
     end
     item
-      DisplayName = 'text.grey'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -13
-      Font.Name = 'Courier New'
-      Font.Style = []
-    end
-    item
-      DisplayName = 'text.normal'
+      DisplayName = 'text'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -13
@@ -113,7 +105,7 @@ object SyntAnal20: TLibSyntAnalyzer
     item
       DisplayName = 'header'
       StyleName = 'header'
-      Expression = '(?<=^[\x20\x09]*).+?:[\x20\x09]*$'
+      Expression = '(?<=^[\x20\x09]*)\w.*?:[\x20\x09]*$'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -149,19 +141,10 @@ object SyntAnal20: TLibSyntAnalyzer
     item
       DisplayName = 'text done/cancelled'
       Enabled = False
-      StyleName = 'text.grey'
       TokenType = 2
       Expression = 
         '(?<=^[\x20\x09]*([x\+]|\[[x\+\-]\]|\x{2713}|\x{2714}|\x{2611}|\x' +
         '{2718})\x20).*$'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'text normal'
-      StyleName = 'text.normal'
-      TokenType = 1
-      Expression = '(?<=^[\x20\x09]*).+$'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -219,6 +202,14 @@ object SyntAnal20: TLibSyntAnalyzer
       StyleName = '@tag'
       TokenType = 3
       Expression = '(?<=\s)@(completed)[\s\(][\w\.\-!\?\x20:\+\(\)]+[\x20\t]*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'text'
+      StyleName = 'text'
+      TokenType = 1
+      Expression = '\w+'
       ColumnFrom = 0
       ColumnTo = 0
     end>
