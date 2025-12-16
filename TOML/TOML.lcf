@@ -1,4 +1,4 @@
-object SyntAnal12: TLibSyntAnalyzer
+object SyntAnal18: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Section'
@@ -101,7 +101,7 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'Id'
       StyleName = 'Id'
       TokenType = 5
-      Expression = '[a-z_]\w*'
+      Expression = '[a-z_][\w\-]*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -171,7 +171,7 @@ object SyntAnal12: TLibSyntAnalyzer
   SampleText.Strings = (
     '[section]'
     '"Str \"You can quote me\". Name" + '#39'Test'#39
-    'test = """'
+    'test-val_ = """'
     '  Roses are red"""'
     'regex = '#39#39#39'I [dw]on'#39't work'#39#39#39' + test'
     ''
@@ -195,7 +195,7 @@ object SyntAnal12: TLibSyntAnalyzer
   LexerName = 'TOML'
   SkipSpaces = False
   Notes.Strings = (
-    'Alex (Synwrite)'
+    'Alexey Torgashin (CudaText)'
     'Doc: https://github.com/toml-lang/toml')
   LineComment = '#'
   Charset = DEFAULT_CHARSET
