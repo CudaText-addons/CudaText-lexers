@@ -302,6 +302,40 @@ object SyntAnal7: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
+      DisplayName = 'Tree item'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 64
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 190
+        end
+        item
+          TagList.Strings = (
+            'class'
+            'constructor'
+            'datatype'
+            'function'
+            'lemma'
+            'method'
+            'module'
+            'newtype'
+            'predicate'
+            'trait')
+          TokenTypes = 4
+        end>
+      BlockEnd = '}'
+      NameFmt = '%s0 %s-1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      CancelNextRules = True
+      CollapseFmt = '%sz0 ... }'
+      IgnoreAsParent = False
+    end
+    item
       DisplayName = '{'
       ConditionList = <
         item
