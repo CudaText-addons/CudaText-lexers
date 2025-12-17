@@ -125,7 +125,7 @@ object SyntAnal7: TLibSyntAnalyzer
       DisplayName = 'String@'
       StyleName = 'String'
       TokenType = 4
-      Expression = '(?s)@"(""|.)*?("|\Z)'
+      Expression = '(?s)@"(""|.)*?("(?!")|\Z)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -150,8 +150,8 @@ object SyntAnal7: TLibSyntAnalyzer
       StyleName = 'Symbol'
       TokenType = 3
       Expression = 
-        '[\.,;@\[\]\#]|:=|:\||:+|&+|\|+|'#13#10'<==>|==>|<==|<=?|>=?|\-\->|'#13#10'!=' +
-        '?|=+|\*|\-|\+|/|%'
+        '[\.,;@\[\]\#\?]|:=|:\||:+|&+|\|+|'#13#10'<==>|==>|<==|<=?|>=?|\-\->|'#13#10 +
+        '!=?|=+|\*|\-|\+|/|%'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -193,7 +193,7 @@ object SyntAnal7: TLibSyntAnalyzer
       DisplayName = 'Id'
       StyleName = 'Id'
       TokenType = 2
-      Expression = '[\w'#39'?]+'
+      Expression = '[\w'#39']+'
       ColumnFrom = 0
       ColumnTo = 0
     end>
@@ -368,7 +368,9 @@ object SyntAnal7: TLibSyntAnalyzer
   SubAnalyzers = <>
   SampleText.Strings = (
     '// fragment'
-    '"d\"d" + @"test""test" + object array1 bv34 /** doc */'
+    '"dd\"dd" + @"dd'
+    'dd""'
+    'dd" + object array1 bv34 /** doc */'
     '123_456.789_123, 1.23e5, 123e-2, 5e10, 1., .5, .25e-3.'
     ''
     'ghost function F(x: int, y: bool): int {'
