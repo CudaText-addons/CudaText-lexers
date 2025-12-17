@@ -1,0 +1,7 @@
+[info]
+title=Dafny
+type=lexer
+subdir=-
+
+[lexer1]
+file=Dafny

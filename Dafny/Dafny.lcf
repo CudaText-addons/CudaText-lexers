@@ -1,0 +1,297 @@
+object SyntAnal7: TLibSyntAnalyzer
+  Formats = <
+    item
+      DisplayName = 'Symbol'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Number'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'String'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clTeal
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Comment'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Id'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id keyword'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlack
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
+      DisplayName = 'Id types'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id modifier'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clOlive
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end>
+  TokenRules = <
+    item
+      DisplayName = 'Comment block'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)/\*.*?(\*/|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment line'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '//.*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol { }'
+      StyleName = 'Symbol'
+      TokenType = 6
+      Expression = '[\{\}]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol ( )'
+      StyleName = 'Symbol'
+      TokenType = 7
+      Expression = '[\(\)]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Symbol'
+      StyleName = 'Symbol'
+      TokenType = 3
+      Expression = 
+        '[\.,;@\[\]\#]|:=|:\||:+|&+|\|+|'#13#10'<==>|==>|<==|<=?|>=?|!=?|'#13#10'==>|' +
+        '=+|\*|\-|\+|/|%'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Number'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '\b\d+(\.\d+)?(e[\+\-]?\d+)?\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id types'
+      StyleName = 'Id types'
+      TokenType = 2
+      Expression = 
+        '(?-i)(this|bool|char|real|multiset|map|imap|nat|int|ORDINAL|obje' +
+        'ct|string|set|iset|seq|array|array[1-9]\d*|bv0|bv[1-9]\d*)\b'#13#10
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id'
+      StyleName = 'Id'
+      TokenType = 2
+      Expression = '[\w'#39'?]+'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end>
+  BlockRules = <
+    item
+      DisplayName = 'Id keyword'
+      StyleName = 'Id keyword'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'abstract'
+            'allocated'
+            'as'
+            'assert'
+            'assume'
+            'break'
+            'by'
+            'calc'
+            'case'
+            'class'
+            'codatatype'
+            'const'
+            'constructor'
+            'continue'
+            'datatype'
+            'decreases'
+            'downto'
+            'else'
+            'ensures'
+            'exists'
+            'expect'
+            'export'
+            'extends'
+            'false'
+            'for'
+            'forall'
+            'fresh'
+            'function'
+            'ghost'
+            'greatest'
+            'if'
+            'import'
+            'in'
+            'include'
+            'invariant'
+            'is'
+            'iterator'
+            'label'
+            'least'
+            'lemma'
+            'match'
+            'method'
+            'modifies'
+            'modify'
+            'module'
+            'nameonly'
+            'new'
+            'newtype'
+            'null'
+            'old'
+            'opaque'
+            'opened'
+            'predicate'
+            'print'
+            'provides'
+            'reads'
+            'refines'
+            'requires'
+            'return'
+            'returns'
+            'reveal'
+            'reveals'
+            'static'
+            'then'
+            'to'
+            'trait'
+            'true'
+            'twostate'
+            'type'
+            'unchanged'
+            'var'
+            'while'
+            'witness'
+            'yield'
+            'yields')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'Id modifier'
+      StyleName = 'Id modifier'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'ghost'
+            'twostate')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = '{'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 64
+        end>
+      BlockEnd = '}'
+      DisplayInTree = False
+      HighlightPos = cpAny
+      DynSelectMin = True
+      DrawStaple = True
+      CollapseFmt = '{ ... }'
+      IgnoreAsParent = False
+      AutoCloseText = '}'
+    end
+    item
+      DisplayName = '}'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '}')
+          TokenTypes = 64
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end>
+  CodeTemplates = <>
+  SubAnalyzers = <>
+  SampleText.Strings = (
+    '// fragment of comp/Calls.dfy'
+    'object OBJect array1 bv0 bv34'
+    ''
+    'function F(x: int, y: bool): int {'
+    '  x + if y then 2 else 3'
+    '}'
+    ''
+    'method Main() {'
+    '  var w;'
+    '  w := F(2, false);'
+    '  print w, "\n";'
+    '}')
+  TokenTypeNames.Strings = (
+    'Unknown'
+    'Comment'
+    'Id'
+    'Symbol'
+    'String'
+    'Number'
+    'Symbol {}'
+    'Symbol ()')
+  Extentions = 'dfy'
+  LexerName = 'Dafny'
+  Notes.Strings = (
+    'Alexey Torgashin (CudaText)')
+  LineComment = '//'
+  Charset = DEFAULT_CHARSET
+end
