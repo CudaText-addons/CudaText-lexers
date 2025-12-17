@@ -71,6 +71,14 @@ object SyntAnal7: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Attrib'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
     end>
   TokenRules = <
     item
@@ -118,6 +126,14 @@ object SyntAnal7: TLibSyntAnalyzer
       StyleName = 'String'
       TokenType = 4
       Expression = '(?s)@"(""|.)*?("|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Attrib'
+      StyleName = 'Attrib'
+      TokenType = 8
+      Expression = '(?i)(?<=\{):([a-z]\w*)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -269,6 +285,8 @@ object SyntAnal7: TLibSyntAnalyzer
         item
           TagList.Strings = (
             'ghost'
+            'greatest'
+            'least'
             'twostate')
           TokenTypes = 4
         end>
@@ -318,8 +336,10 @@ object SyntAnal7: TLibSyntAnalyzer
     'method Main() {'
     '  var w;'
     '  w := F(2, false);'
-    '  print w, "\n";'
-    '}')
+    '}'
+    ''
+    'lemma {:axiom} PHoldEvenly()'
+    '  ensures  forall i {:trigger Q(i)} :: P(i) ==> P(i + 2) && Q(i)')
   TokenTypeNames.Strings = (
     'Unknown'
     'Comment'
@@ -328,7 +348,8 @@ object SyntAnal7: TLibSyntAnalyzer
     'String'
     'Number'
     'Symbol {}'
-    'Symbol ()')
+    'Symbol ()'
+    'Attrib')
   Extentions = 'dfy'
   LexerName = 'Dafny'
   Notes.Strings = (
