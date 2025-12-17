@@ -229,10 +229,18 @@ object SyntAnal15: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
+      DisplayName = 'Variable nested'
+      StyleName = 'Variable'
+      TokenType = 7
+      Expression = '(?<=\[\#)\*?\w+\*?(?=\]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
       DisplayName = 'Variable'
       StyleName = 'Variable'
       TokenType = 7
-      Expression = '\#\w+\#|\[\#\w+\]'
+      Expression = '\#\*?\w+\*?\#'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -679,6 +687,15 @@ object SyntAnal15: TLibSyntAnalyzer
   CodeTemplates = <>
   SubAnalyzers = <>
   SampleText.Strings = (
+    '[#VarName] - Standard variable, but nested version'
+    '#*VarName*# - Escaped standard variable'
+    '[*MeasureName*] - Escaped Section variable'
+    '[#[#CURRENTSECTION]] - Nested built-in variable'
+    '[#[#*CURRENTSECTION*]] - Nested and escaped built-in variable'
+    
+      '[#CURRENTSECTION#:X] - Nested variable that gets the value of th' +
+      'e X'
+    ''
     '[Rainmeter]'
     'Update=1000'
     'AccurateText=1'
@@ -757,7 +774,9 @@ object SyntAnal15: TLibSyntAnalyzer
   Notes.Strings = (
     'CudaText lexer for the Rainmeter language.'
     'Created 2017-05-17 by qwerky.'
-    'Based on Rainmeter version 4.1.')
+    'Based on Rainmeter version 4.1.'
+    ''
+    'Minor changes by Alexey Torgashin (CudaText).')
   ParseEndOfLine = True
   LineComment = ';'
   Charset = DEFAULT_CHARSET
