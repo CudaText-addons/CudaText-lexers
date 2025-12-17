@@ -63,13 +63,29 @@ object SyntAnal7: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
+    end
+    item
+      DisplayName = 'Comment doc'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = 12615808
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
     end>
   TokenRules = <
+    item
+      DisplayName = 'Comment doc'
+      StyleName = 'Comment doc'
+      TokenType = 1
+      Expression = '(?s)/\*\*(/\*.*?\*/|.)*?(\*/|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
     item
       DisplayName = 'Comment block'
       StyleName = 'Comment'
       TokenType = 1
-      Expression = '(?s)/\*.*?(\*/|\Z)'
+      Expression = '(?s)/\*(/\*.*?\*/|.)*?(\*/|\Z)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -98,12 +114,36 @@ object SyntAnal7: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
+      DisplayName = 'String@'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '(?s)@"(""|.)*?("|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
       DisplayName = 'Symbol'
       StyleName = 'Symbol'
       TokenType = 3
       Expression = 
-        '[\.,;@\[\]\#]|:=|:\||:+|&+|\|+|'#13#10'<==>|==>|<==|<=?|>=?|!=?|'#13#10'==>|' +
-        '=+|\*|\-|\+|/|%'
+        '[\.,;@\[\]\#]|:=|:\||:+|&+|\|+|'#13#10'<==>|==>|<==|<=?|>=?|\-\->|'#13#10'!=' +
+        '?|=+|\*|\-|\+|/|%'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '"(\\.|.)*?("|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Number hex'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = '0x[\h_]+\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -111,7 +151,7 @@ object SyntAnal7: TLibSyntAnalyzer
       DisplayName = 'Number'
       StyleName = 'Number'
       TokenType = 5
-      Expression = '\b\d+(\.\d+)?(e[\+\-]?\d+)?\b'
+      Expression = '\b\d[\d_]*(\.[\d_]*)?(e[\+\-]?\d[\d_]*)?'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -267,10 +307,11 @@ object SyntAnal7: TLibSyntAnalyzer
   CodeTemplates = <>
   SubAnalyzers = <>
   SampleText.Strings = (
-    '// fragment of comp/Calls.dfy'
-    'object OBJect array1 bv0 bv34'
+    '// fragment'
+    '"d\"d" + @"test""test" + object array1 bv34 /** doc */'
+    '123_456.789_123, 1.23e5, 123e-2, 5e10, 1., .5, .25e-3.'
     ''
-    'function F(x: int, y: bool): int {'
+    'ghost function F(x: int, y: bool): int {'
     '  x + if y then 2 else 3'
     '}'
     ''
