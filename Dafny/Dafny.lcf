@@ -130,10 +130,18 @@ object SyntAnal7: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'Attrib'
+      DisplayName = ':Attrib'
       StyleName = 'Attrib'
       TokenType = 8
-      Expression = '(?i)(?<=\{):([a-z]\w*)\b'
+      Expression = '(?i)(?<=\{):([a-z_\$][\w\$\#]*)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = '@Attrib'
+      StyleName = 'Attrib'
+      TokenType = 8
+      Expression = '@[a-z_]\w*'
       ColumnFrom = 0
       ColumnTo = 0
     end
