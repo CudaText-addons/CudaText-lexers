@@ -1,4 +1,4 @@
-object SyntAnal15: TLibSyntAnalyzer
+object SyntAnal17: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'header'
@@ -105,7 +105,7 @@ object SyntAnal15: TLibSyntAnalyzer
     item
       DisplayName = 'header'
       StyleName = 'header'
-      Expression = '(?<=^[\x20\x09]*)\w.*?:[\x20\x09]*$'
+      Expression = '(?<=^[\x20\x09]*)\S.*?:[\x20\x09]*$'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -201,7 +201,7 @@ object SyntAnal15: TLibSyntAnalyzer
       Enabled = False
       StyleName = '@tag'
       TokenType = 3
-      Expression = '(?<=\s)@(completed)[\s\(][\w\.\-!\?\x20:\+\(\)]+[\x20\t]*'
+      Expression = '(?r)(?<=\s)@completed[\s\(][\w\.\-!\?\x20:\+\(\)]+[\x20\t]*'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -209,7 +209,7 @@ object SyntAnal15: TLibSyntAnalyzer
       DisplayName = 'text'
       StyleName = 'text'
       TokenType = 1
-      Expression = '\w+'
+      Expression = '(?r)\w+'
       ColumnFrom = 0
       ColumnTo = 0
     end>
