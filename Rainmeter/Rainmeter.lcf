@@ -1,4 +1,4 @@
-object SyntAnal15: TLibSyntAnalyzer
+object SyntAnal14: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Default'
@@ -200,7 +200,7 @@ object SyntAnal15: TLibSyntAnalyzer
       DisplayName = 'Last Key'
       StyleName = 'Key'
       TokenType = 3
-      Expression = '^[^=\n\r]+(?=(=.*\z)(^\z|;.*\z)*(\[|\Z))'
+      Expression = '^[^=\n\r]+(?=(=.*\z)(^\z|;.*\z)*([\[\-]|\Z))'
       ColumnFrom = 0
       ColumnTo = 0
     end
