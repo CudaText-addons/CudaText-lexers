@@ -285,6 +285,7 @@ object SyntAnal14: TLibSyntAnalyzer
           TokenTypes = 8
           IgnoreCase = True
         end>
+      BlockOffset = -1
       HighlightPos = cpAny
       IgnoreAsParent = False
     end
