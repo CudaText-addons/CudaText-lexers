@@ -285,31 +285,12 @@ object SyntAnal14: TLibSyntAnalyzer
           TokenTypes = 8
           IgnoreCase = True
         end>
-      BlockOffset = -1
-      HighlightPos = cpAny
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'SectionBegin'
-      StyleName = 'SectionBG'
-      StatesAdd = 6
-      StatesRemove = 1
-      ConditionList = <
-        item
-          TokenTypes = 2
-          IgnoreCase = True
-        end>
-      BlockEnd = 'SectionEnd'
-      Highlight = True
-      DynHighlight = dhRange
       HighlightPos = cpAny
       IgnoreAsParent = False
     end
     item
       DisplayName = 'MeterBegin'
       StyleName = 'MeterBG'
-      StatesAdd = 5
-      StatesRemove = 2
       ConditionList = <
         item
           TagList.Strings = (
@@ -323,13 +304,12 @@ object SyntAnal14: TLibSyntAnalyzer
       DisplayInTree = False
       DynHighlight = dhRange
       HighlightPos = cpAny
+      CancelNextRules = True
       IgnoreAsParent = False
     end
     item
       DisplayName = 'MeasureBegin'
       StyleName = 'MeasureBG'
-      StatesAdd = 4
-      StatesRemove = 3
       ConditionList = <
         item
           TagList.Strings = (
@@ -343,13 +323,12 @@ object SyntAnal14: TLibSyntAnalyzer
       DisplayInTree = False
       DynHighlight = dhRange
       HighlightPos = cpAny
+      CancelNextRules = True
       IgnoreAsParent = False
     end
     item
       DisplayName = 'VariablesBegin'
       StyleName = 'VariablesBG'
-      StatesAdd = 3
-      StatesRemove = 4
       ConditionList = <
         item
           TagList.Strings = (
@@ -362,13 +341,12 @@ object SyntAnal14: TLibSyntAnalyzer
       DisplayInTree = False
       DynHighlight = dhRange
       HighlightPos = cpAny
+      CancelNextRules = True
       IgnoreAsParent = False
     end
     item
       DisplayName = 'MetadataBegin'
       StyleName = 'MetadataBG'
-      StatesAdd = 2
-      StatesRemove = 5
       ConditionList = <
         item
           TagList.Strings = (
@@ -381,13 +359,12 @@ object SyntAnal14: TLibSyntAnalyzer
       DisplayInTree = False
       DynHighlight = dhRange
       HighlightPos = cpAny
+      CancelNextRules = True
       IgnoreAsParent = False
     end
     item
       DisplayName = 'RainmeterBegin'
       StyleName = 'RainmeterBG'
-      StatesAdd = 1
-      StatesRemove = 6
       ConditionList = <
         item
           TagList.Strings = (
@@ -398,6 +375,21 @@ object SyntAnal14: TLibSyntAnalyzer
       BlockEnd = 'SectionEnd'
       Highlight = True
       DisplayInTree = False
+      DynHighlight = dhRange
+      HighlightPos = cpAny
+      CancelNextRules = True
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'SectionBegin'
+      StyleName = 'SectionBG'
+      ConditionList = <
+        item
+          TokenTypes = 2
+          IgnoreCase = True
+        end>
+      BlockEnd = 'SectionEnd'
+      Highlight = True
       DynHighlight = dhRange
       HighlightPos = cpAny
       IgnoreAsParent = False

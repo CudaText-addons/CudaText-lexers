@@ -4,6 +4,9 @@ str2=
 styles_cmt=Comment
 styles_str=
 
+[op]
+decrement_fold=0
+
 [map]
 Default=Id
 Comment=Comment
