@@ -1,7 +1,0 @@
-[info]
-title=Config-rc
-type=lexer-lite
-subdir=-
-
-[lexer1]
-file=Config-rc
