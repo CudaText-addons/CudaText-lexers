@@ -1,0 +1,7 @@
+[info]
+title=KDL
+type=lexer
+subdir=-
+
+[lexer1]
+file=KDL
