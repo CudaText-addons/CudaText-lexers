@@ -1,4 +1,4 @@
-object SyntAnal19: TLibSyntAnalyzer
+object SyntAnal12: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Number'
@@ -41,9 +41,17 @@ object SyntAnal19: TLibSyntAnalyzer
       Font.Style = []
     end
     item
-      DisplayName = 'Id keyword'
+      DisplayName = 'Id keywords'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
+    end
+    item
+      DisplayName = 'Id types'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clPurple
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
@@ -57,6 +65,22 @@ object SyntAnal19: TLibSyntAnalyzer
       Font.Style = []
     end>
   TokenRules = <
+    item
+      DisplayName = 'Comment'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '//.*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Comment block'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)/\*.*?(\*/|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
     item
       DisplayName = 'Symbol {}'
       StyleName = 'Symbol'
@@ -74,10 +98,10 @@ object SyntAnal19: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'Id bool'
-      StyleName = 'Id keyword'
+      DisplayName = 'Id consts'
+      StyleName = 'Id keywords'
       TokenType = 2
-      Expression = '(?-i)\#(true|false)\b'
+      Expression = '(?-i)\#(true|false|\-?inf|nan|null)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -94,6 +118,16 @@ object SyntAnal19: TLibSyntAnalyzer
       StyleName = 'String'
       TokenType = 4
       Expression = '"(\\.|.)*?("|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Number'
+      StyleName = 'Number'
+      TokenType = 5
+      Expression = 
+        '[\-\+]?\d[\d_]*(\.[\d_]+)?(e[\-\+]?[\d_]+)?\b|'#13#10'[\-\+]?0b[01][01' +
+        '_]*\b|'#13#10'[\-\+]?0o[0-7][0-7_]*\b|'#13#10'[\-\+]?0x[\h][\h_]*\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -117,27 +151,63 @@ object SyntAnal19: TLibSyntAnalyzer
       DisplayName = 'Symbol'
       StyleName = 'Symbol'
       TokenType = 3
-      Expression = '[\\\-=\#]'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'Comment'
-      StyleName = 'Comment'
-      TokenType = 1
-      Expression = '//.*'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'Number'
-      StyleName = 'Number'
-      TokenType = 5
-      Expression = '\d+\b'
+      Expression = '[\\=]'
       ColumnFrom = 0
       ColumnTo = 0
     end>
   BlockRules = <
+    item
+      DisplayName = 'Id types'
+      StyleName = 'Id types'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'base64'
+            'base85'
+            'country-2'
+            'country-3'
+            'country-subdivision'
+            'currency'
+            'date'
+            'date-time'
+            'decimal'
+            'decimal128'
+            'decimal64'
+            'duration'
+            'email'
+            'f32'
+            'f64'
+            'hostname'
+            'i128'
+            'i16'
+            'i32'
+            'i64'
+            'i8'
+            'idn-email'
+            'idn-hostname'
+            'ipv4'
+            'ipv6'
+            'irl'
+            'irl-reference'
+            'isize'
+            'regex'
+            'time'
+            'u128'
+            'u16'
+            'u32'
+            'u64'
+            'u8'
+            'url'
+            'url-reference'
+            'url-template'
+            'usize'
+            'uuid')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpAny
+      IgnoreAsParent = False
+    end
     item
       DisplayName = '{'
       ConditionList = <
@@ -168,14 +238,16 @@ object SyntAnal19: TLibSyntAnalyzer
   CodeTemplates = <>
   SubAnalyzers = <>
   SampleText.Strings = (
+    '/* comment'
+    'end */'
     'jobs {'
     '  fmt_and_docs "Check fmt & build docs" {'
     '    runs-on ubuntu-latest'
     '    steps {'
     '      step uses="actions/checkout@v1"'
     '      step "Install Rust" uses="actions-rs/toolchain@v1" {'
-    '        components rustfmt'
-    '        override #true'
+    '        components -0xAF_203 '
+    '        override #true #nan #-inf //comment'
     '      }'
     '      step rustfmt { run cargo fmt --all -- --check }'
     '      step docs { run cargo doc --no-deps }'
@@ -195,6 +267,7 @@ object SyntAnal19: TLibSyntAnalyzer
   LexerName = 'KDL'
   Notes.Strings = (
     'Alexey Torgashin (CudaText)')
+  RestartFromLineStart = True
   LineComment = '//'
   Charset = DEFAULT_CHARSET
 end
