@@ -106,7 +106,7 @@ object SyntAnal12: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'String m-line'
+      DisplayName = 'String """'
       StyleName = 'String'
       TokenType = 4
       Expression = '(?s)""".*?("""|\Z)'
@@ -117,7 +117,15 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'String'
       StyleName = 'String'
       TokenType = 4
-      Expression = '"(\\.|.)*?("|$)'
+      Expression = '(?s)"(\\.|.)*?("|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String #'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = '\#".*?("\#|$)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -136,14 +144,6 @@ object SyntAnal12: TLibSyntAnalyzer
       StyleName = 'Switch'
       TokenType = 7
       Expression = '\-[\w\-]+'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'String #'
-      StyleName = 'String'
-      TokenType = 4
-      Expression = '\#".*?("\#|$)'
       ColumnFrom = 0
       ColumnTo = 0
     end
