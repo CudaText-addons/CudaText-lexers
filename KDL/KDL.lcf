@@ -151,7 +151,7 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'Symbol'
       StyleName = 'Symbol'
       TokenType = 3
-      Expression = '[\\=]'
+      Expression = '[=\\\-]'
       ColumnFrom = 0
       ColumnTo = 0
     end>
@@ -165,6 +165,7 @@ object SyntAnal12: TLibSyntAnalyzer
           TagList.Strings = (
             'base64'
             'base85'
+            'boolean'
             'country-2'
             'country-3'
             'country-subdivision'
@@ -191,7 +192,9 @@ object SyntAnal12: TLibSyntAnalyzer
             'irl'
             'irl-reference'
             'isize'
+            'number'
             'regex'
+            'string'
             'time'
             'u128'
             'u16'
