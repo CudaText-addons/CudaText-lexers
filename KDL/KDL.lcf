@@ -1,9 +1,17 @@
 object SyntAnal12: TLibSyntAnalyzer
   Formats = <
     item
-      DisplayName = 'Number'
+      DisplayName = 'Comment'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clNavy
+      Font.Color = clGray
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsItalic]
+    end
+    item
+      DisplayName = 'Symbol'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clMaroon
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = [fsBold]
@@ -17,20 +25,12 @@ object SyntAnal12: TLibSyntAnalyzer
       Font.Style = []
     end
     item
-      DisplayName = 'Symbol'
+      DisplayName = 'Number'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clMaroon
+      Font.Color = clNavy
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = [fsBold]
-    end
-    item
-      DisplayName = 'Comment'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGray
-      Font.Height = -13
-      Font.Name = 'Courier New'
-      Font.Style = [fsItalic]
     end
     item
       DisplayName = 'Id'
@@ -57,17 +57,17 @@ object SyntAnal12: TLibSyntAnalyzer
       Font.Style = []
     end
     item
-      DisplayName = 'Switch'
+      DisplayName = 'Id with eq'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clBlue
+      Font.Color = clOlive
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
     end
     item
-      DisplayName = 'Id with eq'
+      DisplayName = 'Switch'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clOlive
+      Font.Color = clBlue
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
@@ -162,6 +162,22 @@ object SyntAnal12: TLibSyntAnalyzer
       Expression = '[=\\\-]'
       ColumnFrom = 0
       ColumnTo = 0
+    end
+    item
+      DisplayName = 'Slash-dash block'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)/\-[\s\w\-=]*\{.*?(\}|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Slash-dash id'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '/\-[\w\-=]+'
+      ColumnFrom = 0
+      ColumnTo = 0
     end>
   BlockRules = <
     item
@@ -253,14 +269,14 @@ object SyntAnal12: TLibSyntAnalyzer
     'end */'
     'jobs {'
     '  fmt_and_docs ##"docs"## {'
-    '    runs-on ubuntu-latest'
+    '    runs-on /-soft-latest "text"'
     '    steps {'
     '      step uses="actions/checkout@v1"'
-    '      step "Install" uses="toolchain@v1" {'
+    '      step "name" uses="toolchain@v1" {'
     '        components -0xAF_20_AF '
     '        override #true #nan #-inf //comment'
     '      }'
-    '      step rustfmt { run cargo fmt --all -- --check }'
+    '      step fmt { run cargo fmt --all -- --check }'
     '      step docs { run cargo doc --no-deps }'
     '    }'
     '  }'
