@@ -106,18 +106,10 @@ object SyntAnal12: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'String """'
-      StyleName = 'String'
-      TokenType = 4
-      Expression = '(?s)""".*?("""|\Z)'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
       DisplayName = 'String'
       StyleName = 'String'
       TokenType = 4
-      Expression = '(?s)"(\\.|.)*?("|$)'
+      Expression = '(?s)("""|")(\\.|.)*?(\1|\Z)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -125,7 +117,7 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'String #'
       StyleName = 'String'
       TokenType = 4
-      Expression = '\#".*?("\#|$)'
+      Expression = '(?s)(\#+)("""|").*?(\2\1|\Z)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -244,12 +236,12 @@ object SyntAnal12: TLibSyntAnalyzer
     '/* comment'
     'end */'
     'jobs {'
-    '  fmt_and_docs "Check fmt & build docs" {'
+    '  fmt_and_docs ##"docs"## {'
     '    runs-on ubuntu-latest'
     '    steps {'
     '      step uses="actions/checkout@v1"'
-    '      step "Install Rust" uses="actions-rs/toolchain@v1" {'
-    '        components -0xAF_203 '
+    '      step "Install" uses="toolchain@v1" {'
+    '        components -0xAF_20_AF '
     '        override #true #nan #-inf //comment'
     '      }'
     '      step rustfmt { run cargo fmt --all -- --check }'
