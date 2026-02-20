@@ -167,7 +167,15 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'Slash-dash block'
       StyleName = 'Comment'
       TokenType = 1
-      Expression = '(?s)/\-[\s\w\-=]*\{.*?(\}|\Z)'
+      Expression = '(?s)(?<=^\s*)/\-\w[\s\w\-=]*\{.*?(\}|\Z)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Slash-dash block 2'
+      StyleName = 'Comment'
+      TokenType = 1
+      Expression = '(?s)/\-\{.*?(\}|\Z)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -175,7 +183,7 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'Slash-dash id'
       StyleName = 'Comment'
       TokenType = 1
-      Expression = '/\-[\w\-=]+'
+      Expression = '(?<!^\s*)/\-[\w\-=]+'
       ColumnFrom = 0
       ColumnTo = 0
     end>
