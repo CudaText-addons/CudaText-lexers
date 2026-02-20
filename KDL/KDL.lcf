@@ -159,7 +159,7 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'Symbol'
       StyleName = 'Symbol'
       TokenType = 3
-      Expression = '[=\\\-]'
+      Expression = '[=\\\-\(\)]'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -273,11 +273,10 @@ object SyntAnal12: TLibSyntAnalyzer
     '    steps {'
     '      step uses="actions/checkout@v1"'
     '      step "name" uses="toolchain@v1" {'
-    '        components -0xAF_20_AF '
+    '        components (i64)-0xAF_20_AF (u8)0o70'
     '        override #true #nan #-inf //comment'
     '      }'
     '      step fmt { run cargo fmt --all -- --check }'
-    '      step docs { run cargo doc --no-deps }'
     '    }'
     '  }'
     '}')
