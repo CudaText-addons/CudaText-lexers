@@ -63,6 +63,14 @@ object SyntAnal12: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = []
+    end
+    item
+      DisplayName = 'Id with eq'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clOlive
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = []
     end>
   TokenRules = <
     item
@@ -86,6 +94,14 @@ object SyntAnal12: TLibSyntAnalyzer
       StyleName = 'Symbol'
       TokenType = 6
       Expression = '[\{\}]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Id with eq'
+      StyleName = 'Id with eq'
+      TokenType = 2
+      Expression = '[a-z_][\w\-\.]*(?=\=)'
       ColumnFrom = 0
       ColumnTo = 0
     end

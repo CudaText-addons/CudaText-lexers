@@ -13,3 +13,4 @@ Id=Id
 Id keywords=Id1
 Id types=Id2
 Switch=Id4
+Id with eq=TagProp
