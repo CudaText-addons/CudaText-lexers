@@ -1,4 +1,4 @@
-object SyntAnal6: TLibSyntAnalyzer
+object SyntAnal19: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Number'
@@ -664,7 +664,7 @@ object SyntAnal6: TLibSyntAnalyzer
     'String'
     'Number')
   Extentions = 'v'
-  LexerName = 'Coq'
+  LexerName = 'Rocq Prover'
   Notes.Strings = (
     'Alexey Torgashin (CudaText)')
   Charset = DEFAULT_CHARSET

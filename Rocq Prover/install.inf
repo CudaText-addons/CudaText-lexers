@@ -1,7 +1,7 @@
 [info]
-title=Coq
+title=Rocq Prover
 type=lexer
 subdir=-
 
 [lexer1]
-file=Coq
+file=Rocq Prover
