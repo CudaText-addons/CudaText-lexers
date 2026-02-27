@@ -272,6 +272,8 @@ object SyntAnal3: TLibSyntAnalyzer
             'bitRead'
             'bitSet'
             'bitWrite'
+            'byte'
+            'char'
             'constrain'
             'cos'
             'delay'
@@ -279,8 +281,11 @@ object SyntAnal3: TLibSyntAnalyzer
             'detachInterrupt'
             'digitalRead'
             'digitalWrite'
+            'float'
             'highByte'
+            'int'
             'interrupts'
+            'long'
             'loop'
             'lowByte'
             'map'
@@ -300,9 +305,11 @@ object SyntAnal3: TLibSyntAnalyzer
             'shiftOut'
             'sin'
             'sizeof'
+            'sq'
             'sqrt'
             'tan'
-            'tone')
+            'tone'
+            'word')
           TokenTypes = 4
         end>
       HighlightPos = cpAny
