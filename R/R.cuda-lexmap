@@ -1,15 +1,16 @@
-[map]
-Marked block=-
-Comment=Comment
-Symbol=Symbol
-Number=Number
-String=String
-Identifier=Id
-Reserved word=IdKeyword
-Std func=Id1
-
 [comments]
 styles_cmt=Comment
 styles_str=String
 str1=
 str2=
+
+[map]
+Comment=Comment
+Symbol=Symbol
+Number=Number
+String=String
+Id=Id
+Id keyword=IdKeyword
+Id func=Id1
+Id plotting=Id2
+Id datasets=Id4

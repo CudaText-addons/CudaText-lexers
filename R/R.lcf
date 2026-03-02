@@ -1,4 +1,4 @@
-object SyntAnal17: TLibSyntAnalyzer
+object SyntAnal16: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Comment'
@@ -78,6 +78,18 @@ object SyntAnal17: TLibSyntAnalyzer
       StyleName = 'Comment'
       TokenType = 1
       Expression = '\#.*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'String raw'
+      StyleName = 'String'
+      TokenType = 4
+      Expression = 
+        '(?s)r(['#39'"])([\-=]+)\(.*?(\)\2\1|\Z)|'#13#10'(?s)r(['#39'"])([\-=]+)\[.*?(\' +
+        ']\2\1|\Z)|'#13#10'(?s)r(['#39'"])([\-=]+)\{.*?(\}\2\1|\Z)|'#13#10'(?s)r(['#39'"])\(.' +
+        '*?(\)\1|\Z)|'#13#10'(?s)r(['#39'"])\[.*?(\]\1|\Z)|'#13#10'(?s)r(['#39'"])\{.*?(\}\1|' +
+        '\Z)'
       ColumnFrom = 0
       ColumnTo = 0
     end
