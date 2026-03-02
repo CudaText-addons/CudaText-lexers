@@ -303,8 +303,7 @@ object SyntAnal3: TLibSyntAnalyzer
             'sq'
             'sqrt'
             'tan'
-            'tone'
-            'word')
+            'tone')
           TokenTypes = 4
         end>
       HighlightPos = cpAny
