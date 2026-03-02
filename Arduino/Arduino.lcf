@@ -300,6 +300,7 @@ object SyntAnal3: TLibSyntAnalyzer
             'shiftOut'
             'sin'
             'sizeof'
+            'sq'
             'sqrt'
             'tan'
             'tone')
