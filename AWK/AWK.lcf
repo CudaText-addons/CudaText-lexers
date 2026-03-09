@@ -33,6 +33,14 @@ object SyntAnal4: TLibSyntAnalyzer
       Font.Style = [fsBold]
     end
     item
+      DisplayName = 'Id builtin'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clBlue
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+    end
+    item
       DisplayName = 'Id var'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clGreen
@@ -156,12 +164,49 @@ object SyntAnal4: TLibSyntAnalyzer
             'for'
             'func'
             'function'
+            'getline'
             'if'
             'in'
             'next'
             'nextfile'
+            'print'
+            'printf'
             'return'
             'while')
+          TokenTypes = 4
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
+      DisplayName = 'builtin'
+      StyleName = 'Id builtin'
+      BlockType = btTagDetect
+      ConditionList = <
+        item
+          TagList.Strings = (
+            'atan2'
+            'close'
+            'cos'
+            'exp'
+            'fflush'
+            'gsub'
+            'index'
+            'int'
+            'length'
+            'log'
+            'match'
+            'rand'
+            'sin'
+            'split'
+            'sprintf'
+            'sqrt'
+            'srand'
+            'sub'
+            'substr'
+            'system'
+            'tolower'
+            'toupper')
           TokenTypes = 4
         end>
       HighlightPos = cpBound
