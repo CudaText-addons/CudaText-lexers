@@ -9,6 +9,7 @@ Symbol=Symbol
 Number=Number
 Id=Id
 Id keyword=IdKeyword
+Id builtin=Id4
 Id var=IdVar
 Comment=Comment
 String=String

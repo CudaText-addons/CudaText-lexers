@@ -1,4 +1,4 @@
-object SyntAnal4: TLibSyntAnalyzer
+object SyntAnal2: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Symbol'
@@ -38,7 +38,7 @@ object SyntAnal4: TLibSyntAnalyzer
       Font.Color = clBlue
       Font.Height = -13
       Font.Name = 'Courier New'
-      Font.Style = [fsBold]
+      Font.Style = []
     end
     item
       DisplayName = 'Id var'
@@ -147,7 +147,7 @@ object SyntAnal4: TLibSyntAnalyzer
     end>
   BlockRules = <
     item
-      DisplayName = 'keywords'
+      DisplayName = 'Id keywords'
       StyleName = 'Id keyword'
       BlockType = btTagDetect
       ConditionList = <
@@ -179,7 +179,7 @@ object SyntAnal4: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
-      DisplayName = 'builtin'
+      DisplayName = 'Id builtin'
       StyleName = 'Id builtin'
       BlockType = btTagDetect
       ConditionList = <
@@ -303,7 +303,7 @@ object SyntAnal4: TLibSyntAnalyzer
   LexerName = 'AWK'
   SkipSpaces = False
   Notes.Strings = (
-    'Alexey (CudaText)'
+    'Alexey Torgashin (CudaText)'
     'Ref http://www.math.utah.edu/docs/info/gawk_22.html'
     'Examples https://github.com/mfherbst/awk-course')
   RestartFromLineStart = True
