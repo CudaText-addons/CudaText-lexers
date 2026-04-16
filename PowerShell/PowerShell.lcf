@@ -1,4 +1,4 @@
-object SyntAnal25: TLibSyntAnalyzer
+object SyntAnal15: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Symbol'
@@ -234,10 +234,18 @@ object SyntAnal25: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
+      DisplayName = 'Symbol {}'
+      StyleName = 'Symbol'
+      TokenType = 10
+      Expression = '[\{\}]'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
       DisplayName = 'Symbol single'
       StyleName = 'Symbol'
       TokenType = 3
-      Expression = '[\{\}\(\)\[\]\$`]'
+      Expression = '[\(\)\[\]\$`]'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -560,7 +568,7 @@ object SyntAnal25: TLibSyntAnalyzer
         item
           TagList.Strings = (
             '{')
-          TokenTypes = 8
+          TokenTypes = 1024
         end>
       BlockEnd = '}'
       DisplayInTree = False
@@ -576,42 +584,9 @@ object SyntAnal25: TLibSyntAnalyzer
         item
           TagList.Strings = (
             '}')
-          TokenTypes = 8
+          TokenTypes = 1024
         end>
       HighlightPos = cpAny
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Block comment'
-      BlockName = 'Block comment'
-      NotParent = True
-      AlwaysEnabled = True
-      ConditionList = <
-        item
-          TokenTypes = 2
-        end>
-      BlockEnd = 'Block comment end'
-      DisplayInTree = False
-      HighlightPos = cpBound
-      CollapseFmt = '<# ... #>'
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Block comment end'
-      BlockName = 'Block comment'
-      StrictParent = True
-      AlwaysEnabled = True
-      BlockType = btRangeEnd
-      ConditionList = <
-        item
-          CondType = tcNotEqual
-          TokenTypes = 2
-        end
-        item
-          TokenTypes = 2
-        end>
-      BlockOffset = 1
-      HighlightPos = cpBound
       IgnoreAsParent = False
     end
     item
@@ -665,7 +640,8 @@ object SyntAnal25: TLibSyntAnalyzer
     'String here'
     'Operator'
     'Var'
-    'Id type')
+    'Id type'
+    'Symbol {}')
   Extentions = 'ps1 psd1 psm1 pssc psrc'
   LexerName = 'PowerShell'
   Notes.Strings = (
