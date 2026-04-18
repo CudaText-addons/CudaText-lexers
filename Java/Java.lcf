@@ -1,4 +1,4 @@
-object SyntAnal25: TLibSyntAnalyzer
+object SyntAnal10: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Symbol'
@@ -513,7 +513,7 @@ object SyntAnal25: TLibSyntAnalyzer
           TokenTypes = 4
         end
         item
-          TokenTypes = 2180
+          TokenTypes = 6276
         end>
       BlockEnd = '}'
       EndOfTextClose = True
@@ -592,7 +592,7 @@ object SyntAnal25: TLibSyntAnalyzer
   Extentions = 'java jav'
   LexerName = 'Java'
   Notes.Strings = (
-    'Alexey (CudaText)'
+    'Alexey Torgashin (CudaText)'
     '+ functions shown in tree '
     
       '  (not correct for funcs out of classes, for nested classes, but' +
