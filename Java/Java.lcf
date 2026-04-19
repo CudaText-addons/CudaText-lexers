@@ -454,6 +454,34 @@ object SyntAnal9: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
+      DisplayName = 'class field'
+      BlockName = 'class'
+      StrictParent = True
+      ConditionList = <
+        item
+          TagList.Strings = (
+            ';')
+          TokenTypes = 8
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 6270
+        end
+        item
+          TokenTypes = 4
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 6270
+        end>
+      NameFmt = '%s-1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      NoEndRule = True
+      TreeItemImage = 3
+      IgnoreAsParent = False
+    end
+    item
       DisplayName = 'enum'
       ConditionList = <
         item
@@ -480,32 +508,6 @@ object SyntAnal9: TLibSyntAnalyzer
       HighlightPos = cpAny
       CancelNextRules = True
       CollapseFmt = 'enum %s-1 ...'
-      TreeItemImage = 3
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'field'
-      ConditionList = <
-        item
-          TagList.Strings = (
-            ';')
-          TokenTypes = 8
-        end
-        item
-          CondType = tcSkip
-          TokenTypes = 6270
-        end
-        item
-          TokenTypes = 4
-        end
-        item
-          CondType = tcSkip
-          TokenTypes = 6270
-        end>
-      NameFmt = '%s-1'
-      RefToCondEnd = True
-      HighlightPos = cpAny
-      NoEndRule = True
       TreeItemImage = 3
       IgnoreAsParent = False
     end
