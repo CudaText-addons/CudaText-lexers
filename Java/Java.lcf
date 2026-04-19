@@ -1,4 +1,4 @@
-object SyntAnal10: TLibSyntAnalyzer
+object SyntAnal9: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Symbol'
@@ -484,6 +484,32 @@ object SyntAnal10: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
+      DisplayName = 'field'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            ';')
+          TokenTypes = 8
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 6270
+        end
+        item
+          TokenTypes = 4
+        end
+        item
+          CondType = tcSkip
+          TokenTypes = 6270
+        end>
+      NameFmt = '%s-1'
+      RefToCondEnd = True
+      HighlightPos = cpAny
+      NoEndRule = True
+      TreeItemImage = 3
+      IgnoreAsParent = False
+    end
+    item
       DisplayName = 'func'
       ConditionList = <
         item
@@ -585,10 +611,10 @@ object SyntAnal10: TLibSyntAnalyzer
     'Keyword'
     'Modifier'
     'Annot'
-    'Symbol ( )'
-    'Symbol { }'
+    'Symbol ()'
+    'Symbol {}'
     'Symbol <>'
-    'Symbol [ ]')
+    'Symbol []')
   Extentions = 'java jav'
   LexerName = 'Java'
   Notes.Strings = (
