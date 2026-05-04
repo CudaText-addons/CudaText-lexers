@@ -1,7 +1,0 @@
-[info]
-title=Regular expressions
-type=lexer
-subdir=-
-
-[lexer1]
-file=Regular_expressions
