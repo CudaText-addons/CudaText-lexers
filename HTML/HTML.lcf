@@ -174,22 +174,6 @@ object SyntAnal8: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
-      DisplayName = 'Comment doc'
-      StyleName = 'Comment doc'
-      TokenType = 1
-      Expression = '(?s)<! .*? >'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'Include tag'
-      StyleName = 'Include tag'
-      TokenType = 12
-      Expression = '<\?php\b | <\? | \?> | <% | %>'
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
       DisplayName = '<'
       StyleName = 'Tag bound'
       TokenType = 10
@@ -206,6 +190,22 @@ object SyntAnal8: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
+      DisplayName = 'Tag name'
+      StyleName = 'Tag id incorrect'
+      TokenType = 6
+      Expression = '(?<=<[/!]?)[a-z_][\w\-]*'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Include tag'
+      StyleName = 'Include tag'
+      TokenType = 12
+      Expression = '<\?php\b|<\?|\?>|<%|%>'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
       DisplayName = 'Number'
       StyleName = 'Number'
       BlockName = 'Tag begin'
@@ -218,48 +218,35 @@ object SyntAnal8: TLibSyntAnalyzer
       DisplayName = 'Color'
       StyleName = 'Color'
       BlockName = 'Tag begin'
-      TokenType = 7
-      Expression = '\#([0-9a-f]{3}|[0-9a-f]{6})\b'
+      TokenType = 2
+      Expression = '\#(\h{3}|\h{6})\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
     item
-      DisplayName = 'Tag param'
+      DisplayName = 'Tag str quoted'
       StyleName = 'Tag string'
       BlockName = 'Tag begin'
       TokenType = 4
-      Expression = '(?s) (?<=[\=\{\[:,]\x20*) ("|'#39') (<\?.+?\?>|.)*? (\1|\Z)'
+      Expression = '(?s)(?<==\x20*)("|'#39')(<\?.+?\?>|.)*?(\1|\Z)'
       ColumnFrom = 0
       ColumnTo = 0
     end
     item
-      DisplayName = 'Tag ='
-      StyleName = 'Tag bound'
-      BlockName = 'Tag begin'
-      TokenType = 3
-      Expression = '='
-      ColumnFrom = 0
-      ColumnTo = 0
-    end
-    item
-      DisplayName = 'Tag id known'
+      DisplayName = 'Tag prop'
       StyleName = 'Tag prop'
       BlockName = 'Tag begin'
-      TokenType = 2
-      Expression = 
-        '\b(allowfullscreen|allowpaymentrequest|async|autofocus|autoplay|' +
-        'checked|controls|default|defer|disabled|formnovalidate|hidden|is' +
-        'map|itemscope|loop|multiple|muted|nomodule|novalidate|open|plays' +
-        'inline|readonly|required|reversed|selected|truespeed)\b'
+      TokenType = 7
+      Expression = '[a-z_][\w\-]*(?=\x20*=)'
       ColumnFrom = 0
       ColumnTo = 0
     end
     item
-      DisplayName = 'Tag id'
-      StyleName = 'Tag unknown text'
+      DisplayName = 'Tag prop val'
+      StyleName = 'Tag string'
       BlockName = 'Tag begin'
-      TokenType = 2
-      Expression = '[\w\-\.][\w\-:\./]*'
+      TokenType = 8
+      Expression = '(?<==\x20*)[^\s='#39'"<>]+'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -282,7 +269,8 @@ object SyntAnal8: TLibSyntAnalyzer
     item
       DisplayName = 'Other symbols'
       StyleName = 'Tag bound'
-      Expression = '[:\{\}"\[\]]'
+      TokenType = 3
+      Expression = '[=:\{\}"\[\]]'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -296,24 +284,7 @@ object SyntAnal8: TLibSyntAnalyzer
     end>
   BlockRules = <
     item
-      DisplayName = 'Tag id incorrect'
-      StyleName = 'Tag id incorrect'
-      BlockType = btTagDetect
-      ConditionList = <
-        item
-          TokenTypes = 4
-        end
-        item
-          TagList.Strings = (
-            '<'
-            '</')
-          TokenTypes = 1024
-        end>
-      HighlightPos = cpAny
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Tag id'
+      DisplayName = 'Tag name'
       StyleName = 'Tag id correct'
       BlockType = btTagDetect
       ConditionList = <
@@ -463,47 +434,8 @@ object SyntAnal8: TLibSyntAnalyzer
             'video'
             'wbr'
             'xmp')
-          TokenTypes = 4
+          TokenTypes = 64
           IgnoreCase = True
-        end
-        item
-          TagList.Strings = (
-            '<'
-            '</')
-          TokenTypes = 1024
-        end>
-      HighlightPos = cpBound
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Tag property'
-      StyleName = 'Tag prop'
-      BlockType = btTagDetect
-      ConditionList = <
-        item
-          TagList.Strings = (
-            '=')
-          TokenTypes = 8
-        end
-        item
-          TokenTypes = 4
-        end>
-      IdentIndex = 1
-      HighlightPos = cpBound
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Tag property value'
-      StyleName = 'Tag string'
-      BlockType = btTagDetect
-      ConditionList = <
-        item
-          TokenTypes = 20
-        end
-        item
-          TagList.Strings = (
-            '=')
-          TokenTypes = 8
         end>
       HighlightPos = cpBound
       IgnoreAsParent = False
@@ -534,7 +466,7 @@ object SyntAnal8: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
-      DisplayName = 'Void tag'
+      DisplayName = 'Tag void begin'
       ConditionList = <
         item
           TagList.Strings = (
@@ -554,15 +486,10 @@ object SyntAnal8: TLibSyntAnalyzer
             'source'
             'track'
             'wbr')
-          TokenTypes = 4
+          TokenTypes = 64
           IgnoreCase = True
-        end
-        item
-          TagList.Strings = (
-            '<')
-          TokenTypes = 1024
         end>
-      BlockEnd = 'Void tag end'
+      BlockEnd = 'Tag void end'
       NotCollapsed = True
       NameFmt = '%s-1~[>]1'
       RefToCondEnd = True
@@ -572,7 +499,7 @@ object SyntAnal8: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
-      DisplayName = 'Void tag end'
+      DisplayName = 'Tag void end'
       BlockType = btRangeEnd
       ConditionList = <
         item
@@ -586,7 +513,7 @@ object SyntAnal8: TLibSyntAnalyzer
       StyleName = 'Tag id hilite BG'
       ConditionList = <
         item
-          TokenTypes = 4
+          TokenTypes = 64
           IgnoreCase = True
         end
         item
@@ -608,7 +535,7 @@ object SyntAnal8: TLibSyntAnalyzer
       BlockType = btRangeEnd
       ConditionList = <
         item
-          TokenTypes = 4
+          TokenTypes = 64
           IgnoreCase = True
         end
         item
@@ -618,28 +545,6 @@ object SyntAnal8: TLibSyntAnalyzer
         end>
       SameIdent = True
       HighlightPos = cpBound
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Tag attribute'
-      BlockName = 'Tag begin'
-      ConditionList = <
-        item
-          TokenTypes = 20
-        end
-        item
-          TagList.Strings = (
-            '=')
-          TokenTypes = 8
-        end
-        item
-          TokenTypes = 4
-        end>
-      NotCollapsed = True
-      DisplayInTree = False
-      NameFmt = '%s0 %s-1 %s-2'
-      HighlightPos = cpBound
-      NoEndRule = True
       IgnoreAsParent = False
     end
     item
@@ -796,50 +701,8 @@ object SyntAnal8: TLibSyntAnalyzer
             'WhiteSmoke'
             'Yellow'
             'YellowGreen')
-          TokenTypes = 4
+          TokenTypes = 256
           IgnoreCase = True
-        end>
-      HighlightPos = cpAny
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'SVG begin'
-      StyleName = 'SVG BG'
-      ConditionList = <
-        item
-          TagList.Strings = (
-            'svg')
-          TokenTypes = 4
-          IgnoreCase = True
-        end
-        item
-          TagList.Strings = (
-            '<')
-          TokenTypes = 1024
-        end>
-      BlockEnd = 'SVG end'
-      RefToCondEnd = True
-      DynHighlight = dhRange
-      HighlightPos = cpAny
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'SVG end'
-      BlockType = btRangeEnd
-      ConditionList = <
-        item
-          TokenTypes = 2048
-        end
-        item
-          TagList.Strings = (
-            'svg')
-          TokenTypes = 4
-          IgnoreCase = True
-        end
-        item
-          TagList.Strings = (
-            '</')
-          TokenTypes = 1024
         end>
       HighlightPos = cpAny
       IgnoreAsParent = False
@@ -894,16 +757,22 @@ object SyntAnal8: TLibSyntAnalyzer
       StartExpression = '(?<=\bstyle\x20*=\x20*)"'
       EndExpression = '"'
       SyntAnalyzer = SyntAnal7
+    end
+    item
+      DisplayName = 'SVG'
+      StyleName = 'SVG BG'
+      StartExpression = '<svg\b'
+      EndExpression = '</svg>'
+      SyntAnalyzer = SyntAnal17
+      IncludeBounds = True
     end>
   SampleText.Strings = (
     '<!doctype test="123">'
     '<!-- comment -->'
-    '<meta2>text</meta3>'
-    '<? php ?> or <% asp text  %> '
-    ''
+    '<?php ?> text <% asp %> <unknown> &nbsp;'
     '<html> '
     '  <head>'
-    '    <title test="15" #$@ >Text 123</title>'
+    '    <title test=20 #$@ >Text 123</title>'
     '  </head>'
     ''
     '  <script type="text/javascript">'
@@ -916,35 +785,34 @@ object SyntAnal8: TLibSyntAnalyzer
     '  </script> '
     '  <style>'
     '  p {'
-    '  color: #ff0 }'
+    '    color: #ff0 }'
     '  </style>'
     '  '
     '  <svg> <filter type="table"> </svg>'
     '      '
-    '  <body src="www.com" style='#39'aaa; aaa; aaa;'#39'> '
-    '    <h1 color=#dde color=yellow color=violet >Text &nbsp;</h1> '
+    '  <body src=/dir/name style="p { color: #AB0; }" > '
+    '    <h1 color=#FA0 color=yellow prop=200 >Text</h1> '
     '  </body> '
     '</html>')
   TokenTypeNames.Strings = (
     'Unknown'
     'Comment'
-    'Identifier'
+    'Color'
     'Symbol'
     'String'
     'Number'
-    'Number2'
-    'Color'
-    'String2'
+    'Tag name'
+    'Tag prop'
+    'Tag prop val'
     'Text'
-    'Open Tag'
-    'Close Tag'
-    'Include Tag')
+    'Tag bracket <'
+    'Tag bracket >'
+    'Include tag')
   Extentions = 
     'html htm htt hta htx htc htd shtml phtml xhtml asp aspx ascx asm' +
     'x jsp hhc dtd'
   LexerName = 'HTML'
   Notes.Strings = (
-    'Created by 480499497 from forum.wincmd.ru (named HTML_dev)'
-    'Fully reworked by Alexey Torgashin (CudaText)')
+    'Alexey Torgashin (CudaText)')
   Charset = DEFAULT_CHARSET
 end
