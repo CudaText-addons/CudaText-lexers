@@ -1,4 +1,4 @@
-object SyntAnal2: TLibSyntAnalyzer
+object SyntAnal16: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Text'
@@ -433,6 +433,13 @@ object SyntAnal2: TLibSyntAnalyzer
       ColumnTo = 0
     end
     item
+      DisplayName = 'Backticks'
+      StyleName = 'Block literal'
+      Expression = '`.*?(`|$)'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
       DisplayName = 'Text bold'
       StyleName = 'Text bold'
       TokenType = 2
@@ -444,7 +451,7 @@ object SyntAnal2: TLibSyntAnalyzer
       DisplayName = 'Text italic'
       StyleName = 'Text italic'
       TokenType = 2
-      Expression = #39'(\\'#39'|[^'#39'\n])+?'#39' | __\w+?__'
+      Expression = '(?<!\w)'#39'(\\'#39'|[^'#39'\n])+?'#39' | __\w+?__'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -541,7 +548,7 @@ object SyntAnal2: TLibSyntAnalyzer
   LexerName = 'AsciiDoc'
   SkipSpaces = False
   Notes.Strings = (
-    'Alexey (CudaText)')
+    'Alexey Torgashin (CudaText)')
   LineComment = '//'
   Charset = DEFAULT_CHARSET
 end
