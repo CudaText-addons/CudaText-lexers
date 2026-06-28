@@ -7,7 +7,6 @@ object SyntAnal17: TLibSyntAnalyzer
       Font.Height = -13
       Font.Name = 'Courier New'
       Font.Style = [fsBold]
-      BgColor = clMoneyGreen
     end
     item
       DisplayName = 'item.done'
@@ -208,7 +207,7 @@ object SyntAnal17: TLibSyntAnalyzer
     item
       DisplayName = 'text'
       StyleName = 'text'
-      TokenType = 1
+      TokenType = 5
       Expression = '(?r)\w+'
       ColumnFrom = 0
       ColumnTo = 0
@@ -279,11 +278,12 @@ object SyntAnal17: TLibSyntAnalyzer
     '^Item'
     'gray text'
     'tag'
-    'url')
+    'url'
+    'text')
   Extentions = 'todo todolist taskpaper tasks'
   LexerName = 'ToDo'
   Notes.Strings = (
-    'Lexer for "Plain Tasks" plugin'
-    'Author: OlehL at GitHub')
+    'Lexer for "Plain Tasks" CudaText plugin'
+    'Authors: OlehL at GitHub / Alexey Torgashin (CudaText)')
   Charset = DEFAULT_CHARSET
 end
