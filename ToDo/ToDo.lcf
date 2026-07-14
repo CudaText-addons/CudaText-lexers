@@ -1,4 +1,4 @@
-object SyntAnal17: TLibSyntAnalyzer
+object SyntAnal15: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'header'
@@ -226,21 +226,6 @@ object SyntAnal17: TLibSyntAnalyzer
       GroupIndex = 20
       CollapseFmt = '%sz0 {...}'
       IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'items'
-      ConditionList = <
-        item
-          TokenTypes = 2
-        end>
-      EndOfTextClose = True
-      DisplayInTree = False
-      NameFmt = '%sz0'
-      HighlightPos = cpAny
-      DrawStaple = True
-      GroupIndex = 20
-      CollapseFmt = '%sz0 {...}'
-      IgnoreAsParent = False
     end>
   CodeTemplates = <>
   SubAnalyzers = <>
@@ -275,7 +260,7 @@ object SyntAnal17: TLibSyntAnalyzer
     '  [] item @created(14-12-24 15:57)')
   TokenTypeNames.Strings = (
     '^Head'
-    '^Item'
+    'Item'
     'gray text'
     'tag'
     'url'
