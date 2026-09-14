@@ -182,7 +182,7 @@ object SyntAnal9: TLibSyntAnalyzer
     'Value'
     'Section'
     'Number')
-  Extentions = 'ini dsk dti dof inf lng srv reg sas cfg desktop'
+  Extentions = 'ini dsk dti dof inf lng srv reg sas cfg desktop /.editorconfig'
   LexerName = 'Ini files'
   SkipSpaces = False
   Notes.Strings = (
