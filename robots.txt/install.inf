@@ -1,7 +1,7 @@
 [info]
-title=robots_txt
+title=robots.txt
 type=lexer-lite
 subdir=-
 
 [lexer1]
-file=robots_txt
+file=robots.txt
