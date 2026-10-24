@@ -603,14 +603,7 @@ object SyntAnal21: TLibSyntAnalyzer
       HighlightPos = cpAny
       IgnoreAsParent = False
     end>
-  CodeTemplates = <
-    item
-      Name = 'select'
-      Description = 'select statement'
-      Code.Strings = (
-        'select * from ')
-      Advanced = True
-    end>
+  CodeTemplates = <>
   SubAnalyzers = <>
   SampleText.Strings = (
     '/* '
