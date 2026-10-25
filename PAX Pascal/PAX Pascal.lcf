@@ -833,6 +833,5 @@ object SyntAnal110: TLibSyntAnalyzer
   DefaultStyleName = 'Default'
   Extentions = 'pas'
   LexerName = 'PAX Pascal'
-  Internal = True
   Charset = DEFAULT_CHARSET
 end

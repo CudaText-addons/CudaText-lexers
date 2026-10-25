@@ -4,4 +4,4 @@ type=lexer
 subdir=-
 
 [lexer1]
-file=PAX_Pascal
+file=PAX Pascal

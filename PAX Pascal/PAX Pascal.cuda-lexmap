@@ -1,0 +1,18 @@
+[map]
+Default=Id
+Symbol=Symbol
+Number=Number
+String=String
+Identifier=Id
+Reserved word=IdKeyword
+Comment=Comment
+Preprocessor=Comment2
+Marked block=-
+Interface section=-
+Implemenation Section=-
+Function separator=IdVar
+Current block=-
+Current function=-
+Current Line=-
+Search Match=-
+Base types=Id2
