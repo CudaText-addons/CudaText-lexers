@@ -1,4 +1,4 @@
-object SyntAnal5: TLibSyntAnalyzer
+object SyntAnal1: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Comment'
@@ -324,17 +324,37 @@ object SyntAnal5: TLibSyntAnalyzer
             'beq'
             'bg'
             'bge'
+            'bgeu'
             'bgu'
             'bl'
             'ble'
             'bleu'
+            'blu'
             'bn'
             'bne'
             'bneg'
+            'bnz'
             'bpos'
             'bvc'
             'bvs'
+            'bz'
             'call'
+            'fba'
+            'fbe'
+            'fbg'
+            'fbge'
+            'fbl'
+            'fble'
+            'fblg'
+            'fbn'
+            'fbne'
+            'fbo'
+            'fbu'
+            'fbue'
+            'fbug'
+            'fbuge'
+            'fbul'
+            'fbule'
             'jmp'
             'jmpl'
             'nop'
@@ -372,36 +392,6 @@ object SyntAnal5: TLibSyntAnalyzer
         end>
       HighlightPos = cpAny
       NoEndRule = True
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Block comment'
-      BlockName = 'Block comment'
-      NotParent = True
-      AlwaysEnabled = True
-      ConditionList = <
-        item
-          TokenTypes = 2
-        end>
-      BlockEnd = 'Block comment end'
-      DisplayInTree = False
-      HighlightPos = cpBound
-      CollapseFmt = '/* ... */'
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = 'Block comment end'
-      BlockName = 'Block comment'
-      StrictParent = True
-      AlwaysEnabled = True
-      BlockType = btRangeEnd
-      ConditionList = <
-        item
-          CondType = tcNotEqual
-          TokenTypes = 2
-        end>
-      BlockOffset = 1
-      HighlightPos = cpBound
       IgnoreAsParent = False
     end
     item
@@ -483,7 +473,7 @@ object SyntAnal5: TLibSyntAnalyzer
   Extentions = 'm s'
   LexerName = 'Assembly SPARC'
   Notes.Strings = (
-    'Alexey (SynWrite)')
+    'Alexey Torgashin (CudaText)')
   LineComment = ';'
   Charset = DEFAULT_CHARSET
 end
