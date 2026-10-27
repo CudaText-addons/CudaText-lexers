@@ -1,4 +1,4 @@
-object SyntAnal12: TLibSyntAnalyzer
+object SyntAnal14: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Symbol'
@@ -97,6 +97,14 @@ object SyntAnal12: TLibSyntAnalyzer
       BlockName = 'Property begin'
       TokenType = 2
       Expression = '\b(read(only)?|write(only)?|default|nodefault|stored)\b'
+      ColumnFrom = 0
+      ColumnTo = 0
+    end
+    item
+      DisplayName = 'Keyword, not Id'
+      StyleName = 'Id keyword'
+      TokenType = 10
+      Expression = '\bof\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -704,10 +712,10 @@ object SyntAnal12: TLibSyntAnalyzer
       ConditionList = <
         item
           TagList.Strings = (
-            ';'
-            ':'
+            '('
             '.'
-            '(')
+            ':'
+            ';')
           TokenTypes = 392
         end
         item
@@ -755,9 +763,9 @@ object SyntAnal12: TLibSyntAnalyzer
       ConditionList = <
         item
           TagList.Strings = (
-            ';'
+            '('
             ':'
-            '(')
+            ';')
           TokenTypes = 392
         end
         item
@@ -798,9 +806,9 @@ object SyntAnal12: TLibSyntAnalyzer
       ConditionList = <
         item
           TagList.Strings = (
-            ';'
+            '('
             ':'
-            '(')
+            ';')
           TokenTypes = 392
         end
         item
@@ -1004,7 +1012,7 @@ object SyntAnal12: TLibSyntAnalyzer
       DisplayName = 'asm section'
       StartExpression = 'asm\b'#13#10
       EndExpression = 'end'#13#10
-      SyntAnalyzer = SyntAnal2
+      SyntAnalyzer = SyntAnal1
     end>
   SampleText.Strings = (
     'unit Unit1; //Comment'
@@ -1086,7 +1094,8 @@ object SyntAnal12: TLibSyntAnalyzer
     'Preproc'
     ';'
     '( )'
-    '[ ]')
+    '[ ]'
+    'Id keyword')
   Extentions = 'pas inc dpr lpr p pp'
   LexerName = 'Pascal'
   Notes.Strings = (
