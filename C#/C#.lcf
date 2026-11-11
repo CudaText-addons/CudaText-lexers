@@ -479,25 +479,6 @@ object SyntAnal4: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
-      DisplayName = '{'
-      ConditionList = <
-        item
-          TagList.Strings = (
-            '{')
-          TokenTypes = 512
-        end>
-      BlockEnd = '}'
-      DisplayInTree = False
-      DynHighlight = dhBound
-      HighlightPos = cpRange
-      DynSelectMin = True
-      DrawStaple = True
-      CollapseFmt = '{ ... }'
-      IgnoreAsParent = False
-      AutoCloseMode = acmCloseNearest
-      AutoCloseText = '}'
-    end
-    item
       DisplayName = 'class'
       ConditionList = <
         item
@@ -522,6 +503,19 @@ object SyntAnal4: TLibSyntAnalyzer
       IgnoreAsParent = False
     end
     item
+      DisplayName = '}'
+      BlockName = '{'
+      BlockType = btRangeEnd
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '}')
+          TokenTypes = 512
+        end>
+      HighlightPos = cpBound
+      IgnoreAsParent = False
+    end
+    item
       DisplayName = 'namespace'
       ConditionList = <
         item
@@ -535,19 +529,6 @@ object SyntAnal4: TLibSyntAnalyzer
       HighlightPos = cpBound
       CollapseFmt = 'namespace %s-1'
       TreeItemImage = 0
-      IgnoreAsParent = False
-    end
-    item
-      DisplayName = '}'
-      BlockName = '{'
-      BlockType = btRangeEnd
-      ConditionList = <
-        item
-          TagList.Strings = (
-            '}')
-          TokenTypes = 512
-        end>
-      HighlightPos = cpBound
       IgnoreAsParent = False
     end
     item
@@ -694,10 +675,7 @@ object SyntAnal4: TLibSyntAnalyzer
         end
         item
           CondType = tcSkip
-          TokenTypes = 2
-        end
-        item
-          TokenTypes = 4
+          TokenTypes = 14
         end
         item
           TagList.Strings = (
@@ -815,6 +793,25 @@ object SyntAnal4: TLibSyntAnalyzer
       NoEndRule = True
       TreeItemImage = 3
       IgnoreAsParent = False
+    end
+    item
+      DisplayName = '{'
+      ConditionList = <
+        item
+          TagList.Strings = (
+            '{')
+          TokenTypes = 512
+        end>
+      BlockEnd = '}'
+      DisplayInTree = False
+      DynHighlight = dhBound
+      HighlightPos = cpRange
+      DynSelectMin = True
+      DrawStaple = True
+      CollapseFmt = '{ ... }'
+      IgnoreAsParent = False
+      AutoCloseMode = acmCloseNearest
+      AutoCloseText = '}'
     end>
   CodeTemplates = <>
   SubAnalyzers = <>
