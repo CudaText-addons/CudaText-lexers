@@ -1,4 +1,4 @@
-object SyntAnal28: TLibSyntAnalyzer
+object SyntAnal4: TLibSyntAnalyzer
   Formats = <
     item
       DisplayName = 'Symbol'
@@ -285,6 +285,8 @@ object SyntAnal28: TLibSyntAnalyzer
             'do'
             'else'
             'enum'
+            'extension'
+            'field'
             'finally'
             'fixed'
             'for'
@@ -296,6 +298,7 @@ object SyntAnal28: TLibSyntAnalyzer
             'interface'
             'is'
             'lock'
+            'nameof'
             'namespace'
             'new'
             'not'
@@ -317,6 +320,7 @@ object SyntAnal28: TLibSyntAnalyzer
             'try'
             'typeof'
             'unchecked'
+            'union'
             'using'
             'value'
             'var'
@@ -371,10 +375,12 @@ object SyntAnal28: TLibSyntAnalyzer
           TagList.Strings = (
             'abstract'
             'async'
+            'closed'
             'const'
             'event'
             'explicit'
             'extern'
+            'file'
             'implicit'
             'internal'
             'override'
@@ -384,6 +390,7 @@ object SyntAnal28: TLibSyntAnalyzer
             'public'
             'readonly'
             'ref'
+            'required'
             'sealed'
             'static'
             'unsafe'
@@ -457,9 +464,10 @@ object SyntAnal28: TLibSyntAnalyzer
         item
           TagList.Strings = (
             '('
-            'class')
+            'class'
+            'union')
           CondType = tcNotEqual
-          TokenTypes = 260
+          TokenTypes = 1284
         end>
       IdentIndex = -1
       BlockEnd = 'end of func'
@@ -499,7 +507,8 @@ object SyntAnal28: TLibSyntAnalyzer
           TagList.Strings = (
             'class'
             'interface'
-            'record')
+            'record'
+            'union')
           TokenTypes = 1024
         end>
       IdentIndex = -1
@@ -507,6 +516,7 @@ object SyntAnal28: TLibSyntAnalyzer
       NameFmt = '%s0 %s-1'
       RefToCondEnd = True
       HighlightPos = cpBound
+      CancelNextRules = True
       CollapseFmt = '%s0 %s-1'
       TreeItemImage = 1
       IgnoreAsParent = False
