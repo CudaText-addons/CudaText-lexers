@@ -522,7 +522,7 @@ object SyntAnal19: TLibSyntAnalyzer
     'Symbol ()'
     'Symbol []'
     'Symbol ::')
-  Extentions = 'rs rc'
+  Extentions = 'rs'
   LexerName = 'Rust'
   SkipSpaces = False
   Notes.Strings = (
