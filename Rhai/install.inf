@@ -1,0 +1,7 @@
+[info]
+title=Rhai
+type=lexer
+subdir=-
+
+[lexer1]
+file=Rhai
