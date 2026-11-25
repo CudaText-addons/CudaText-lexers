@@ -1,19 +1,24 @@
 {
   "about": "INI lexer by Alexey Torgashin",
-  "files": "*.ini;*.dsk;*.dti;*.dof;*.inf;*.lng;*.srv;*.reg;*.sas;*.cfg;*.desktop",
+  "files": "*.ini;*.dsk;*.inf;*.srv;*.reg;*.cfg;*.url;*.desktop;.editorconfig;*.cuda-lexmap;*.cuda-theme-syntax;*.cuda-theme-ui",
   "cmt_line": ";",
   "case_sens": true,
+  "consider_spaces": true,
   "rules": {
     "cmt": {
-      "regex": "^[;\\#].*",
+      "regex": "^\\s*[;\\#].*",
+      "style": "Comment"
+    },
+    "cmt2": {
+      "regex": "\\s\\#\\s.*",
       "style": "Comment"
     },
     "section": {
-      "regex": "^\\[.+?\\]",
+      "regex": "^\\[.+?\\]\\x20*",
       "style": "Label"
     },
     "key": {
-      "regex": "^.+?(?=\\=)",
+      "regex": "^.+?(?==)",
       "style": "Id1"
     },
     "eq": {
@@ -23,10 +28,6 @@
     "const": {
       "regex": "\\b(true|false)\\b",
       "style": "Id2"
-    },
-    "num": {
-      "regex": "\\d+\\b",
-      "style": "Number"
     },
     "val": {
       "regex": "\\w+",
