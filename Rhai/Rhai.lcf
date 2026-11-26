@@ -169,7 +169,7 @@ object SyntAnal19: TLibSyntAnalyzer
       TokenType = 5
       Expression = 
         '(\d[\d_]*(\.\d[\d_]*)?(e[\+\-]?[\d_]+)?\b|'#13#10'\d[\d_]*\.(?!\.)[\d_' +
-        ']*)\b|'#13#10'\d[\d_]*e[\+\-]?[\d_]+\b|'#13#10'\d[\d_]*\.'#13#10
+        ']*)\b|'#13#10'\d[\d_]*e[\+\-]?[\d_]+\b|'#13#10'\d[\d_]*\.'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -177,7 +177,7 @@ object SyntAnal19: TLibSyntAnalyzer
       DisplayName = 'Num hex'
       StyleName = 'Number'
       TokenType = 5
-      Expression = '(0x[0-9a-f_]+|0b[01_]+|0o[0-7_]+)\b'
+      Expression = '(0x[\h_]+|0b[01_]+|0o[0-7_]+)\b'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -374,15 +374,14 @@ object SyntAnal19: TLibSyntAnalyzer
     '#!/bin/ff'
     '//comment'
     '//!doc comment'
-    'const ANSWER = 12_300_400;'
-    'let now = timestamp();'
+    'const ANSWER = 0xAA_bb+0b1_0+0o77+1.2e+3;'
+    'let now = timestamp(this.dd);'
     'print("begin\'
     'end");'
     ''
     'fn test1() {'
     '  for (a, i) in arr {'
-    '    for (b, j) in ['#39'x'#39', 20, (), 0.5] {'
-    '        if b > 200 { continue; }'
+    '    for (b, j) in ['#39'x'#39', 20, ()] {'
     '        print(`(${i}, ${j})'
     '              = (${a}, ${b})`);'
     '    }'
