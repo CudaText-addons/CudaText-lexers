@@ -190,8 +190,8 @@ object SyntAnal20: TLibSyntAnalyzer
       StyleName = 'Symbol'
       TokenType = 3
       Expression = 
-        '\$\x20*\(|\+|->|<=|>=|=>|>>|<<|==|!=|&&|\|\||-|/|\*|=|\^|&|\||!|' +
-        '>|<|%|\#\[|(?-i)\bas\b'
+        '\$\x20*\(|\.\.[=<]?|\.|,|\+=?|->|<=|>=|=>|>>|<<|==|!=|&&|\|\||-=' +
+        '?|/=?|\*=?|=|\^=?|&=?|\|=?|!|>|<|%=?|\#!?\[|@|\?'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -208,9 +208,9 @@ object SyntAnal20: TLibSyntAnalyzer
       StyleName = 'Number'
       TokenType = 5
       Expression = 
-        '(\d[\d_]* (\.\d[\d_]*)? (e[\+\-]? [\d_]+)? (f\d*)? \b|'#13#10'\d[\d_]*' +
-        ' \.(?!\.) [\d_]*) (f\d*)? \b|'#13#10'\d[\d_]* e[\+\-]? [\d_]+ \b|'#13#10'\d[' +
-        '\d_]*\.'#13#10
+        '(\d[\d_]*(\.\d[\d_]*)? (e[\+\-]? [\d_]+)? (f(16|32|64|128)?)?\b|' +
+        #13#10'\d[\d_]*\.(?!\.)[\d_]*) (f(16|32|64|128)?)?\b|'#13#10'\d[\d_]*e[\+\-' +
+        ']?[\d_]+\b|'#13#10'\d[\d_]*\.(?!\.)'
       ColumnFrom = 0
       ColumnTo = 0
     end
@@ -295,58 +295,47 @@ object SyntAnal20: TLibSyntAnalyzer
         item
           TagList.Strings = (
             'abstract'
+            'as'
             'async'
             'await'
-            'become'
-            'box'
             'break'
             'const'
             'continue'
-            'copy'
             'crate'
-            'do'
-            'drop'
             'dyn'
             'else'
             'enum'
             'extern'
             'false'
-            'final'
             'fn'
             'for'
+            'gen'
             'if'
             'impl'
             'in'
             'let'
             'loop'
-            'macro'
             'macro_rules!'
             'match'
             'mod'
             'move'
             'mut'
-            'override'
-            'priv'
             'pub'
             'ref'
             'return'
+            'safe'
             'self'
             'static'
             'struct'
             'super'
             'trait'
             'true'
-            'try'
             'type'
-            'typeof'
             'union'
             'unsafe'
-            'unsized'
             'use'
-            'virtual'
             'where'
-            'while'
-            'yield')
+            'while')
           TokenTypes = 1028
         end>
       HighlightPos = cpBound
@@ -361,17 +350,16 @@ object SyntAnal20: TLibSyntAnalyzer
           TagList.Strings = (
             'bool'
             'char'
-            'expr'
+            'f128'
+            'f16'
             'f32'
             'f64'
             'false'
-            'float'
             'i128'
             'i16'
             'i32'
             'i64'
             'i8'
-            'int'
             'isize'
             'str'
             'String'
@@ -381,7 +369,6 @@ object SyntAnal20: TLibSyntAnalyzer
             'u32'
             'u64'
             'u8'
-            'uint'
             'usize')
           TokenTypes = 4
         end>
@@ -481,9 +468,10 @@ object SyntAnal20: TLibSyntAnalyzer
     'Cmt*/'
     '///Cmt doc'
     '$var, $ var, '#39'id, '#39'\xFF'#39', i32, 0x10_AB, 1.2e+3, r#Foo'
+    'let r = cr#"raw c-string"#;'
     ''
     'trait Repr {'
-    '    fn write_repr(&self, writer: @Writer);'
+    '  fn write_repr(&self, writer: @Writer);'
     '}'
     ''
     'impl EscapedCharWriter for @Writer {'
@@ -498,15 +486,15 @@ object SyntAnal20: TLibSyntAnalyzer
     '    }'
     '}'
     ''
-    '    #[test]'
-    '    fn map() {'
-    '        assert_same::<BTreeMap<char, String>>('
-    '            "{'
+    '#[test]'
+    'fn map() {'
+    '  assert_same::<BTreeMap<char, String>>('
+    '    "{'
     #39'a'#39': \"Hello\",'
     #39'b'#39': \"Bye\",'
-    '        }",'
-    '        );'
-    '    }')
+    '   }",'
+    '   );'
+    '}')
   TokenTypeNames.Strings = (
     'Unknown'
     'Comment'
